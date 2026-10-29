@@ -1,6 +1,7 @@
 export type Project = {
   slug: string;
   title: string;
+  category?: string;
   technologies: string[];
   summary?: string;
   overview?: string;
@@ -18,6 +19,7 @@ export const projects: Project[] = [
   {
     slug: "gcc-healthtech-news",
     title: "GCC HealthTech News",
+    category: "News automation",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Vercel"],
     summary:
       "An automated GCC HealthTech briefing combining multi-source news, regional filters, and weekly topic trends in one reading experience.",
@@ -37,6 +39,7 @@ export const projects: Project[] = [
   {
     slug: "institutional-ownership-tracker",
     title: "Institutional Ownership & Short Interest Tracker",
+    category: "Ownership research",
     technologies: ["Next.js", "TypeScript", "Node.js", "Supabase", "PostgreSQL"],
     summary:
       "Institutional ownership research built from SEC 13F filings, with investor dashboards, stock-level comparisons, and historical holdings.",

@@ -37,6 +37,9 @@ export default function SelectedProjects({
                 screenshot={project.screenshot}
               />
               <div className="project-card-content">
+                {project.category && (
+                  <p className="project-card-category">{project.category}</p>
+                )}
                 <CardHeading
                   className="project-card-title"
                   id={`${project.slug}-heading`}
