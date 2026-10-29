@@ -7,7 +7,7 @@ A minimal Next.js portfolio using the App Router and TypeScript. The homepage fe
 Requires Node.js 20.9 or newer.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
@@ -35,3 +35,11 @@ npm start
 ```
 
 Run `npm run typecheck` to check TypeScript types.
+
+## Security
+
+`next.config.ts` applies security headers to every route: CSP, anti-framing protection, `nosniff`, an explicit referrer policy, and disabled camera, microphone, and location permissions. Vercel continues to provide HTTPS and HSTS.
+
+The CSP allows same-origin resources and blocks external scripts, frames, plugins, form submissions, and inline event handlers. It follows the [Next.js CSP approach without nonces](https://nextjs.org/docs/app/guides/content-security-policy#without-nonces) to preserve static generation and CDN caching. Required inline scripts and styles remain allowed, so this is not a strict policy against inline script injection. Production disallows `eval`; development additionally allows `eval` and WebSocket connections for Next.js debugging and hot reload. Review the policy before adding third-party resources, forms, or embedded content.
+
+Direct dependencies are pinned to the versions resolved in `package-lock.json`. Use `npm ci` for reproducible installs. Run `npm run security:check` regularly and before deployment to audit production and development dependencies. Review updates deliberately, then run the audit, type check, build, and browser checks before publishing the updated lockfile.
