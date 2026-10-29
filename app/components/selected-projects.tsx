@@ -32,7 +32,10 @@ export default function SelectedProjects({
               href={`/projects/${project.slug}`}
               aria-labelledby={`${project.slug}-heading`}
             >
-              <ProjectScreenshot title={project.title} />
+              <ProjectScreenshot
+                title={project.title}
+                screenshot={project.screenshot}
+              />
               <div className="project-card-content">
                 <CardHeading
                   className="project-card-title"

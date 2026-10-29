@@ -15,9 +15,9 @@ Open http://localhost:3000. Edit `app/page.tsx` to add homepage content, `app/co
 
 The About introduction is in `app/about/page.tsx`. Home and the brand link return to the top of the homepage. In-page scrolling respects the visitor’s reduced-motion preference.
 
-Project content lives in `app/data/projects.ts`. The optional `summary`, `overview`, `businessProblem`, `implementation`, `liveUrl`, and `githubUrl` fields can be filled in as information becomes available. Missing content and links display clearly labeled placeholders.
+Project content lives in `app/data/projects.ts`. The optional `summary`, `overview`, `businessProblem`, `implementation`, `screenshot`, `liveUrl`, and `githubUrl` fields can be filled in as information becomes available. A screenshot includes a local `src` path and descriptive `alt` text; store its image in `public/projects/`. Missing content, screenshots, and links display clearly labeled placeholders.
 
-`app/projects/[slug]/page.tsx` generates a case-study page for each project using the shared `app/components/project-case-study.tsx` layout. Screenshot placeholders are shared through `app/components/project-screenshot.tsx`. Unknown project URLs return a 404 page.
+`app/projects/[slug]/page.tsx` generates a case-study page for each project using the shared `app/components/project-case-study.tsx` layout. Responsive screenshots and their placeholders are shared through `app/components/project-screenshot.tsx`. The GCC HealthTech News image is a capture of its live homepage. Unknown project URLs return a 404 page.
 
 ## Production
 

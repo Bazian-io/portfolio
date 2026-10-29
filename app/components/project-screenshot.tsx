@@ -1,10 +1,30 @@
+import Image from "next/image";
+import type { Project } from "../data/projects";
+
 export default function ProjectScreenshot({
   title,
+  screenshot,
+  sizes = "(min-width: 1216px) 544px, (min-width: 768px) 45vw, 90vw",
   className = "",
 }: {
   title: string;
+  screenshot?: Project["screenshot"];
+  sizes?: string;
   className?: string;
 }) {
+  if (screenshot) {
+    return (
+      <div className={`project-preview project-preview-image ${className}`}>
+        <Image
+          src={screenshot.src}
+          alt={screenshot.alt}
+          fill
+          sizes={sizes}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`project-preview ${className}`}

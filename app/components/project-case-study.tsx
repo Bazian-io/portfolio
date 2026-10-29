@@ -21,6 +21,8 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
       </header>
       <ProjectScreenshot
         title={project.title}
+        screenshot={project.screenshot}
+        sizes="(min-width: 1216px) 1120px, 90vw"
         className="case-study-screenshot"
       />
       <div className="case-study-sections">

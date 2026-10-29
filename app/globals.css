@@ -291,6 +291,17 @@ a:focus-visible {
   text-align: center;
 }
 
+.project-preview-image {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.project-preview-image img {
+  object-fit: cover;
+  object-position: top;
+}
+
 .project-card-content {
   display: flex;
   flex: 1;
