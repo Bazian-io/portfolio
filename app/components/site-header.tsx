@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { profile } from "../data/profile";
 
 const navigation = [
   { href: "/", label: "Home" },
@@ -15,9 +16,9 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container header-inner">
-        <Link className="brand" href="/#top" aria-label="Portfolio home">
+        <Link className="brand" href="/#top" aria-label={`${profile.name} home`}>
           <span className="brand-mark" aria-hidden="true" />
-          Portfolio
+          {profile.name}
         </Link>
         <nav aria-label="Main navigation">
           <ul className="nav-list">

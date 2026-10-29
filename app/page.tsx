@@ -1,11 +1,12 @@
 import SelectedProjects from "./components/selected-projects";
+import { profile } from "./data/profile";
 
 export default function Home() {
   return (
     <>
       <section className="hero" aria-labelledby="hero-heading">
         <p className="hero-eyebrow">Business thinking. Practical technology.</p>
-        <h1 id="hero-heading">Bazian Prudens</h1>
+        <h1 id="hero-heading">{profile.name}</h1>
         <p className="hero-introduction">
           Applying AI, automation, and technology to real-world business problems.
         </p>

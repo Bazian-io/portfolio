@@ -23,7 +23,10 @@ export async function generateMetadata({
 
   return {
     title: project.title,
-    description: project.overview ?? `Project case study for ${project.title}.`,
+    description:
+      project.summary ??
+      project.overview ??
+      `Project case study for ${project.title}.`,
   };
 }
 

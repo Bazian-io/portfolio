@@ -15,9 +15,11 @@ Open http://localhost:3000. Edit `app/page.tsx` to add homepage content, `app/co
 
 The About introduction is in `app/about/page.tsx`. Home and the brand link return to the top of the homepage. In-page scrolling respects the visitor’s reduced-motion preference.
 
+Public identity and contact links live in `app/data/profile.ts`. `app/icon.svg` provides the favicon, and `app/opengraph-image.tsx` generates the social-sharing image using Next.js without external services. Metadata uses the Vercel production hostname when available; set `NEXT_PUBLIC_SITE_URL` to a full URL such as `https://your-domain.com` for another deployment or a custom domain. Local development defaults to `http://localhost:3000`.
+
 Project content lives in `app/data/projects.ts`. The optional `summary`, `overview`, `businessProblem`, `implementation`, `screenshot`, `liveUrl`, and `githubUrl` fields can be filled in as information becomes available. A screenshot includes a local `src` path and descriptive `alt` text; store its image in `public/projects/`. Missing content, screenshots, and links display clearly labeled placeholders.
 
-`app/projects/[slug]/page.tsx` generates a case-study page for each project using the shared `app/components/project-case-study.tsx` layout. Responsive screenshots and their placeholders are shared through `app/components/project-screenshot.tsx`. The GCC HealthTech News image is a capture of its live homepage. Unknown project URLs return a 404 page.
+`app/projects/[slug]/page.tsx` generates a case-study page for each project using the shared `app/components/project-case-study.tsx` layout. Responsive screenshots and their placeholders are shared through `app/components/project-screenshot.tsx`. Project images are captures of the GCC HealthTech News homepage and the Stock Positioning Tracker investor dashboard. Unknown project URLs return a 404 page.
 
 ## Production
 

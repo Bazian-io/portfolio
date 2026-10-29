@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { profile } from "../data/profile";
 
 export const metadata: Metadata = {
   title: "About",
+  description:
+    "The business perspective and interests behind Bazian Prudens’s projects in applied AI, automation, and technology.",
 };
 
 export default function About() {
@@ -10,7 +13,7 @@ export default function About() {
       <header>
         <p className="hero-eyebrow">About</p>
         <h1 className="page-title" id="about-heading">
-          About Bazian Prudens
+          About {profile.name}
         </h1>
         <p className="page-introduction">
           I bring a business perspective to projects in applied AI, automation,

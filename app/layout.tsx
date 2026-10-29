@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import SiteHeader from "./components/site-header";
+import { profile } from "./data/profile";
 import "./globals.css";
 
+const deploymentHost =
+  process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (deploymentHost ? `https://${deploymentHost}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Portfolio",
-    template: "%s | Portfolio",
+    default: `${profile.name} | Applied AI & Automation`,
+    template: `%s | ${profile.name}`,
   },
-  description:
-    "A professional portfolio of applied AI, automation, and business solutions.",
+  description: profile.description,
+  authors: [{ name: profile.name, url: profile.linkedinUrl }],
+  openGraph: {
+    type: "website",
+    siteName: `${profile.name} — Portfolio`,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -25,8 +41,23 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </main>
         <footer className="site-footer">
           <div className="container footer-inner">
-            <p>© {new Date().getFullYear()} Portfolio</p>
-            <p>Applied AI · Automation · Business solutions</p>
+            <div className="footer-identity">
+              <p>© {new Date().getFullYear()} {profile.name}</p>
+              <p>{profile.focus}</p>
+            </div>
+            <nav aria-label="Contact links">
+              <ul className="footer-links">
+                <li>
+                  <a href={`mailto:${profile.email}`}>Email</a>
+                </li>
+                <li>
+                  <a href={profile.linkedinUrl}>LinkedIn</a>
+                </li>
+                <li>
+                  <a href={profile.githubUrl}>GitHub</a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </footer>
       </body>
