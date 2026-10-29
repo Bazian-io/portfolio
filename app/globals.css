@@ -519,6 +519,47 @@ a:focus-visible {
   margin: 0;
 }
 
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.125rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: var(--surface-raised);
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.contact-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.contact-link-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.contact-link-primary:hover {
+  border-color: var(--accent-hover);
+  background: var(--accent-hover);
+  color: var(--on-accent);
+}
+
 .tools-section {
   display: grid;
   gap: 2rem;
@@ -764,10 +805,12 @@ a.project-resource:hover {
   }
 
   .nav-link,
-  .hero-button {
+  .hero-button,
+  .contact-link {
     transition:
       color 150ms ease,
-      background-color 150ms ease;
+      background-color 150ms ease,
+      border-color 150ms ease;
   }
 
   .project-card,

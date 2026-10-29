@@ -17,6 +17,8 @@ The shared introductory sentence and homepage summary live in `app/data/profile.
 
 The About page pairs section headings with readable content columns on desktop and stacks them on smaller screens. Career highlights use distinct blocks, while education and languages share a compact qualifications panel. The MIT program is explicitly marked as in progress.
 
+The About page ends with a Get in touch section using the email and LinkedIn URL from `app/data/profile.ts`. Email opens the visitor’s mail app; LinkedIn opens in a new tab.
+
 The About tools section uses `app/components/tools-section.tsx`, with tool names and categories in `app/data/tools.ts`. Set a group’s `learning` flag to show “Currently learning”. Tools use equally styled tags without proficiency ratings.
 
 Public identity and contact links live in `app/data/profile.ts`. `app/icon.svg` provides the favicon, and `app/opengraph-image.tsx` generates the social-sharing image using Next.js without external services. Metadata uses the Vercel production hostname when available; set `NEXT_PUBLIC_SITE_URL` to a full URL such as `https://your-domain.com` for another deployment or a custom domain. Local development defaults to `http://localhost:3000`.
