@@ -8,12 +8,10 @@ export default function Home() {
         <p className="hero-eyebrow">Business thinking. Practical technology.</p>
         <h1 id="hero-heading">{profile.name}</h1>
         <p className="hero-introduction">
-          Applying AI, automation, and technology to real-world business problems.
+          {profile.introduction}
         </p>
         <p className="hero-description">
-          My business background shapes how I approach technical projects:
-          starting with the problem, understanding the process, and working toward
-          a practical solution.
+          {profile.summary}
         </p>
         <a className="hero-button" href="#projects">
           View Projects

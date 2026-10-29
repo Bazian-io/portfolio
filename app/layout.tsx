@@ -51,7 +51,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                   <a href={`mailto:${profile.email}`}>Email</a>
                 </li>
                 <li>
-                  <a href={profile.linkedinUrl}>LinkedIn</a>
+                  <a
+                    href={profile.linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${profile.name} on LinkedIn (opens in a new tab)`}
+                  >
+                    LinkedIn <span aria-hidden="true">↗</span>
+                  </a>
                 </li>
                 <li>
                   <a href={profile.githubUrl}>GitHub</a>
