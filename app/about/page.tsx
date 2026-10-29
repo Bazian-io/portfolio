@@ -81,6 +81,7 @@ export default function About() {
             </p>
           </div>
         </section>
+        <ToolsSection />
         <section className="about-section" aria-labelledby="education-heading">
           <h2 id="education-heading">Education and credentials</h2>
           <div className="qualification-panel about-section-body">
@@ -112,7 +113,6 @@ export default function About() {
           </div>
         </section>
       </div>
-      <ToolsSection />
     </section>
   );
 }

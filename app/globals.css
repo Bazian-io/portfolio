@@ -522,7 +522,7 @@ a:focus-visible {
 .tools-section {
   display: grid;
   gap: 2rem;
-  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-block: clamp(2rem, 4vw, 3rem);
   border-top: 1px solid var(--border);
 }
 
