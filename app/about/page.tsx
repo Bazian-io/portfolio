@@ -56,13 +56,19 @@ export default function About() {
           <h2 id="building-heading">Turning business problems into software</h2>
           <div className="about-section-body">
             <p>
-              I build web applications from the front end to the database, using AI
-              coding tools.
+              I build web applications from interactive React and Next.js interfaces
+              to Node.js data collectors and Supabase/PostgreSQL databases. I use
+              TypeScript, JavaScript, SQL, HTML/JSX and CSS, working in Cursor with
+              OpenAI Codex and Anthropic Claude Code to help with planning, coding,
+              debugging and reviews.
             </p>
             <p>
               When I identify a business problem, I can build a working first version
               myself and test whether it solves the problem before larger
-              investments are made.
+              investments are made. I check calculations, database rules and
+              responsive layouts, and use SQL migrations, research views,
+              validation triggers and row-level security to support reliable data
+              and public read-only access.
             </p>
           </div>
         </section>

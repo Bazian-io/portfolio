@@ -1,10 +1,14 @@
 import Link from "next/link";
-import type { Project } from "../data/projects";
+import { projects, type Project } from "../data/projects";
 import CaseStudyNavigation from "./case-study-navigation";
 import ProjectScreenshot from "./project-screenshot";
 import ScreenshotViewer from "./screenshot-viewer";
+import TechnicalFlow from "./technical-flow";
 
 export default function ProjectCaseStudy({ project }: { project: Project }) {
+  const relatedProject = projects.find(
+    (candidate) => candidate.slug !== project.slug,
+  );
   const resources = [
     { label: "Live application", url: project.liveUrl, primary: true },
     { label: "GitHub repository", url: project.githubUrl, primary: false },
@@ -88,6 +92,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
         >
           <h2 id="implementation-heading">Technical implementation</h2>
           <div className="case-study-body">
+            {!!project.technicalFlow?.length && (
+              <TechnicalFlow
+                steps={project.technicalFlow}
+                note={project.technicalFlowNote}
+              />
+            )}
             {project.implementation?.length ? (
               <ul className="implementation-list">
                 {project.implementation.map(({ title, description }) => (
@@ -112,6 +122,36 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           </div>
         </section>
       </div>
+      {relatedProject && (
+        <section
+          className="related-project"
+          aria-labelledby="related-project-heading"
+        >
+          <h2 id="related-project-heading">Explore another project</h2>
+          <Link
+            className="related-project-link"
+            href={`/projects/${relatedProject.slug}`}
+            aria-labelledby="related-project-title"
+          >
+            <ProjectScreenshot
+              title={relatedProject.title}
+              screenshot={relatedProject.screenshot}
+              sizes="(min-width: 768px) 240px, 90vw"
+              className="related-project-preview"
+            />
+            <div className="related-project-content">
+              {relatedProject.category && (
+                <p className="project-card-category">{relatedProject.category}</p>
+              )}
+              <h3 id="related-project-title">{relatedProject.title}</h3>
+              {relatedProject.summary && <p>{relatedProject.summary}</p>}
+              <span className="project-card-action">
+                View case study <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </Link>
+        </section>
+      )}
     </article>
   );
 }

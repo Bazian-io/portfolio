@@ -19,6 +19,8 @@ The About page pairs section headings with readable content columns on desktop a
 
 Home and About end with the shared `app/components/contact-section.tsx`, using the email and LinkedIn URL from `app/data/profile.ts`. Email opens the visitor’s mail app; LinkedIn opens in a new tab.
 
+The contact section uses a soft green panel, with full-width contact buttons on small screens. Case studies show a responsive data flow above the implementation details through `app/components/technical-flow.tsx`; its steps and notes live in `technicalFlow` and `technicalFlowNote` in the project data. Each case study ends with an “Explore another project” panel linking to another project from the same data source.
+
 The About tools section uses `app/components/tools-section.tsx`, with tool names and categories in `app/data/tools.ts`. Set a group’s `learning` flag to show “Currently learning”. Tools use equally styled tags without proficiency ratings.
 
 Public identity and contact links live in `app/data/profile.ts`. `app/icon.svg` provides the favicon, and `app/opengraph-image.tsx` generates the social-sharing image using Next.js without external services. Metadata uses the Vercel production hostname when available; set `NEXT_PUBLIC_SITE_URL` to a full URL such as `https://your-domain.com` for another deployment or a custom domain. Local development defaults to `http://localhost:3000`.
