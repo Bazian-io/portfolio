@@ -46,10 +46,20 @@ export default function SelectedProjects({
                 >
                   {project.title}
                 </CardHeading>
-                <p className="project-card-description">
-                  {project.summary ??
-                    "Description coming soon. This space will outline the business problem and project approach."}
-                </p>
+                <dl className="project-card-description">
+                  <div>
+                    <dt>Business problem</dt>
+                    <dd>{project.cardProblem ?? "Business context coming soon."}</dd>
+                  </div>
+                  <div>
+                    <dt>What I built</dt>
+                    <dd>
+                      {project.cardSolution ??
+                        project.summary ??
+                        "Project details coming soon."}
+                    </dd>
+                  </div>
+                </dl>
                 <ul className="project-tags" aria-label="Technologies">
                   {project.technologies.map((technology) => (
                     <li key={technology}>{technology}</li>

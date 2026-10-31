@@ -1,6 +1,7 @@
 export const profile = {
   name: "Bazian Prudens",
-  introduction: "I’m a sales and business leader who also builds technology.",
+  introduction:
+    "I combine business leadership with hands-on development to build web applications, databases, and automation.",
   summary:
     "I combine commercial experience with AI-assisted development to turn business problems into working software. I build and test a first version before larger investments are made.",
   focus: "Applied AI · Automation · Business solutions",
