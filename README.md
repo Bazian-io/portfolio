@@ -27,6 +27,8 @@ Project content lives in `app/data/projects.ts`. The optional `category`, `summa
 
 `app/projects/[slug]/page.tsx` generates a case-study page for each project using the shared `app/components/project-case-study.tsx` layout. Responsive screenshots and their placeholders are shared through `app/components/project-screenshot.tsx`. Project images are captures of the GCC HealthTech News homepage and the Stock Positioning Tracker investor dashboard. Unknown project URLs return a 404 page.
 
+Project cards lift and animate their arrows on hover or keyboard focus, respecting reduced-motion preferences. Case studies use `app/components/case-study-navigation.tsx` for sticky section links and an active-section indicator. Their screenshots open in `app/components/screenshot-viewer.tsx`, a native dialog with zoom, scrolling, a Close button, Escape dismissal, and focus restoration. Card screenshots remain part of the case-study link.
+
 ## Production
 
 ```bash

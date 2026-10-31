@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { Project } from "../data/projects";
+import CaseStudyNavigation from "./case-study-navigation";
 import ProjectScreenshot from "./project-screenshot";
+import ScreenshotViewer from "./screenshot-viewer";
 
 export default function ProjectCaseStudy({ project }: { project: Project }) {
   const resources = [
@@ -39,14 +41,23 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           ))}
         </ul>
       </header>
-      <ProjectScreenshot
-        title={project.title}
-        screenshot={project.screenshot}
-        sizes="(min-width: 1216px) 1120px, 90vw"
-        className="case-study-screenshot"
-      />
+      <CaseStudyNavigation />
+      {project.screenshot ? (
+        <ScreenshotViewer title={project.title} screenshot={project.screenshot} />
+      ) : (
+        <ProjectScreenshot
+          title={project.title}
+          sizes="(min-width: 1216px) 1120px, 90vw"
+          className="case-study-screenshot"
+        />
+      )}
       <div className="case-study-sections">
-        <section className="case-study-section" aria-labelledby="overview-heading">
+        <section
+          className="case-study-section"
+          id="overview"
+          tabIndex={-1}
+          aria-labelledby="overview-heading"
+        >
           <h2 id="overview-heading">Project overview</h2>
           <div className="case-study-body">
             <p>
@@ -55,7 +66,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             </p>
           </div>
         </section>
-        <section className="case-study-section" aria-labelledby="problem-heading">
+        <section
+          className="case-study-section"
+          id="business-problem"
+          tabIndex={-1}
+          aria-labelledby="problem-heading"
+        >
           <h2 id="problem-heading">Business problem</h2>
           <div className="case-study-body">
             <p>
@@ -66,6 +82,8 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
         </section>
         <section
           className="case-study-section"
+          id="technical-implementation"
+          tabIndex={-1}
           aria-labelledby="implementation-heading"
         >
           <h2 id="implementation-heading">Technical implementation</h2>
