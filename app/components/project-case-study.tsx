@@ -114,11 +114,19 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 where applicable.
               </p>
             )}
-            <ul className="project-tags" aria-label="Technologies">
-              {project.technologies.map((technology) => (
-                <li key={technology}>{technology}</li>
-              ))}
-            </ul>
+            <section
+              className="technology-stack tools-group"
+              aria-labelledby="technology-stack-heading"
+            >
+              <div className="tools-group-header">
+                <h3 id="technology-stack-heading">Built with</h3>
+              </div>
+              <ul className="tool-list" aria-label="Technologies">
+                {project.technologies.map((technology) => (
+                  <li key={technology}>{technology}</li>
+                ))}
+              </ul>
+            </section>
           </div>
         </section>
       </div>

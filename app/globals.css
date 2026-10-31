@@ -420,6 +420,10 @@ button {
   font-weight: 500;
 }
 
+.technology-stack {
+  margin-top: 2.5rem;
+}
+
 .case-study {
   min-width: 0;
 }
