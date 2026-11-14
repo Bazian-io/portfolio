@@ -9,6 +9,33 @@ export default function SelectedProjects({
 }) {
   const Heading = headingLevel;
   const CardHeading = headingLevel === "h1" ? "h2" : "h3";
+  // #region agent log
+  fetch("http://127.0.0.1:7502/ingest/4aebd9e1-8e57-4953-bc90-28d248b381c2", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Debug-Session-Id": "bd92ce",
+    },
+    body: JSON.stringify({
+      sessionId: "bd92ce",
+      runId: "pre-fix",
+      hypothesisId: "D",
+      location: "selected-projects.tsx:render",
+      message: "Project card technologies",
+      data: {
+        headingLevel,
+        cards: projects.map((project) => ({
+          slug: project.slug,
+          tagCount: project.technologies.length,
+          lastTag: project.technologies.at(-1),
+          hasCodex: project.technologies.includes("Codex"),
+          technologies: project.technologies,
+        })),
+      },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
 
   return (
     <section

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import DebugCodexVisibility from "./components/debug-codex-visibility";
 import SiteHeader from "./components/site-header";
 import { profile } from "./data/profile";
 import "./globals.css";
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           Skip to content
         </a>
         <SiteHeader />
+        <DebugCodexVisibility />
         <main className="container main-content" id="main-content" tabIndex={-1}>
           {children}
         </main>

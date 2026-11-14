@@ -13,6 +13,31 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
     { label: "Live application", url: project.liveUrl, primary: true },
     { label: "GitHub repository", url: project.githubUrl, primary: false },
   ];
+  // #region agent log
+  fetch("http://127.0.0.1:7502/ingest/4aebd9e1-8e57-4953-bc90-28d248b381c2", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Debug-Session-Id": "bd92ce",
+    },
+    body: JSON.stringify({
+      sessionId: "bd92ce",
+      runId: "pre-fix",
+      hypothesisId: "E",
+      location: "project-case-study.tsx:render",
+      message: "Case study Codex placement",
+      data: {
+        slug: project.slug,
+        hasCodexInTechnologies: project.technologies.includes("Codex"),
+        technicalFlow: project.technicalFlow ?? [],
+        technicalFlowHasCodex: (project.technicalFlow ?? []).some((step) =>
+          step.technologies.includes("Codex"),
+        ),
+      },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
 
   return (
     <article className="case-study" aria-labelledby="case-study-title">
