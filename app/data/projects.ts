@@ -6,6 +6,7 @@ export type Project = {
   summary?: string;
   cardProblem?: string;
   cardSolution?: string;
+  cardMotivation?: string;
   overview?: string;
   businessProblem?: string;
   technicalFlow?: {
@@ -52,8 +53,10 @@ export const projects: Project[] = [
       "Following GCC HealthTech news means checking multiple publishers and separating repeated coverage.",
     cardSolution:
       "A news application with automated collection, country and topic filters, weekly trends, and saved stories.",
+    cardMotivation:
+      "Consultants and companies working in GCC health tech from abroad need a specialized news feed, not a general one. I built it for them, and for myself, to follow the region’s technology and policy news.",
     overview:
-      "A GCC HealthTech news-monitoring application that brings regional coverage, country and topic filters, weekly trends and a saved reading list into one place. Built with Next.js, React and TypeScript, using Tailwind CSS for the interface and Supabase/PostgreSQL for article storage. FreeNewsAPI.ai collection runs daily; separate collectors also support GDELT and the Saudi Ministry of Health RSS feed. A separate, optional Claude relevance check assesses whether an article fits the coverage rules.",
+      "A specialized news feed for consultants and companies working in GCC health tech from abroad. It brings news from hundreds of publishers into one place, with country and topic filters, weekly trends and saved stories. I built it for that group, and for myself, to follow the region’s technology and policy news. The technical details are below.",
     businessProblem:
       "Monitoring a specialist sector across several markets involves checking multiple publishers and separating repeated coverage from distinct stories. The project brings GCC HealthTech updates into one place, with country and topic filters, original-source links, and saved stories to support a more focused review.",
     technicalFlow: [
@@ -121,7 +124,7 @@ export const projects: Project[] = [
   },
   {
     slug: "institutional-ownership-tracker",
-    title: "Institutional Ownership & Short Interest Tracker",
+    title: "Institutional Ownership Tracker",
     category: "Ownership research",
     technologies: [
       "Next.js",
@@ -143,8 +146,10 @@ export const projects: Project[] = [
       "Comparing institutional holdings means working through quarterly filings, amendments, and different security identifiers.",
     cardSolution:
       "A stock research platform with validated SEC filings, interactive dashboards, custom charts, quarterly changes and investor comparisons.",
+    cardMotivation:
+      "Our investor group needed one tool to follow specific institutional investors and stocks across quarters. I built it to our exact needs, so we do our own analysis instead of digging through filings.",
     overview:
-      "A stock research platform for exploring institutional holdings, quarterly changes and investor comparisons. Built with Next.js, React and TypeScript, backed by Supabase/PostgreSQL and hosted on Vercel. Collectors import and validate SEC financial filings before the data reaches the dashboards. The figures describe reported holdings and changes rather than confirmed trades.",
+      "A research tool built for our investor group to follow institutional investors and the stocks they hold. It turns SEC filings into connected investor and stock views: what each tracked investor reports holding, how that changes from quarter to quarter, and how two portfolios compare. It lets us do our own analysis instead of digging through filings. The figures show reported holdings, not confirmed trades.",
     businessProblem:
       "Quarterly filings spread portfolio information across many documents, including amendments and different security identifiers. Comparing them by hand makes it harder to follow an investor’s history or see which institutions report holding the same stock. The project organizes validated filings into connected investor and stock views, with links back to the SEC source documents.",
     technicalFlow: [

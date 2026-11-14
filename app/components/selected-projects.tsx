@@ -47,6 +47,9 @@ export default function SelectedProjects({
       <Heading className="section-heading" id="selected-projects-heading">
         Selected Projects
       </Heading>
+      <p className="selected-projects-intro">
+        Both projects started from a real need of a specific group of users. That is also how I approach sales.
+      </p>
       <div className="project-grid">
         {projects.map((project) => (
           <article
@@ -86,6 +89,12 @@ export default function SelectedProjects({
                         "Project details coming soon."}
                     </dd>
                   </div>
+                  {project.cardMotivation && (
+                    <div>
+                      <dt>Why I built it</dt>
+                      <dd>{project.cardMotivation}</dd>
+                    </div>
+                  )}
                 </dl>
                 <ul className="project-tags" aria-label="Technologies">
                   {project.technologies.map((technology) => (

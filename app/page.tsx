@@ -8,12 +8,16 @@ export default function Home() {
     <div className="home">
       <section className="hero" aria-labelledby="hero-heading">
         <div className="hero-identity">
-          <p className="hero-eyebrow">Business thinking. Practical technology.</p>
+          <p className="hero-eyebrow">Sales leadership. Practical AI.</p>
           <h1 id="hero-heading">{profile.name}</h1>
-          <p className="hero-introduction">{profile.introduction}</p>
+          <p className="hero-introduction">
+            I lead sales and business development, and I build my own tools with AI.
+          </p>
         </div>
         <div className="hero-support">
-          <p className="hero-description">{profile.summary}</p>
+          <p className="hero-description">
+            I’ve built sales from zero, rebuilt the incentives of a 70+ person sales team, and founded and sold a communications agency. I also build my own software with AI, from market monitoring to investor research tools. Building it myself shows me how AI products are made, what buyers really need from them, and how to test an idea before a bigger investment is made.
+          </p>
           <div className="hero-actions">
             <a className="hero-button" href="#projects">
               View Projects

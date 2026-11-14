@@ -277,6 +277,12 @@ button {
   gap: clamp(1.5rem, 3vw, 2rem);
 }
 
+.selected-projects-intro {
+  margin: 0 0 2rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .project-card {
   display: flex;
   flex-direction: column;

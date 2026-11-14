@@ -14,7 +14,7 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${profile.name} | Applied AI & Automation`,
+    default: `${profile.name} | Sales Leader Building with AI`,
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <div className="container footer-inner">
             <div className="footer-identity">
               <p>© {new Date().getFullYear()} {profile.name}</p>
-              <p>{profile.focus}</p>
+              <p>Sales · Business development · Applied AI</p>
             </div>
             <nav aria-label="Contact links">
               <ul className="footer-links">

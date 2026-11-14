@@ -15,13 +15,11 @@ export default function About() {
       <header className="about-header">
         <p className="hero-eyebrow">About {profile.name}</p>
         <h1 className="about-title" id="about-heading">
-          Business leadership.
-          <span>Practical technology.</span>
+          Sales leadership.
+          <span>Practical AI.</span>
         </h1>
-        <p className="page-introduction">{profile.introduction}</p>
-        <p className="about-summary">
-          My work combines commercial experience with the ability to turn business
-          problems into working software.
+        <p className="page-introduction">
+          I’m a sales and business development leader who also builds software with AI. Knowing both sides helps me understand what customers need, where a product gets stuck, and what is worth selling.
         </p>
       </header>
       <div className="about-content">
@@ -44,6 +42,12 @@ export default function About() {
               </p>
             </li>
             <li>
+              <h3>Opening a new market on a small budget</h3>
+              <p>
+                I designed a partnership between Divaco, a mental performance consultancy and seven university researchers that turned €40k in cash into a project worth an estimated €400k. In the UAE, more than 100 companies took a free pilot and more than 10 became paying customers.
+              </p>
+            </li>
+            <li>
               <h3>Sales incentives and coaching</h3>
               <p>
                 I redesigned the incentives and coaching of a sales organization
@@ -53,22 +57,10 @@ export default function About() {
           </ul>
         </section>
         <section className="about-section" aria-labelledby="building-heading">
-          <h2 id="building-heading">Turning business problems into software</h2>
+          <h2 id="building-heading">Building with AI</h2>
           <div className="about-section-body">
             <p>
-              I build web applications from interactive React and Next.js interfaces
-              to Node.js data collectors and Supabase/PostgreSQL databases. I use
-              TypeScript, JavaScript, SQL, HTML/JSX and CSS, working in Cursor with
-              OpenAI Codex and Anthropic Claude Code to help with planning, coding,
-              debugging and reviews.
-            </p>
-            <p>
-              When I identify a business problem, I can build a working first version
-              myself and test whether it solves the problem before larger
-              investments are made. I check calculations, database rules and
-              responsive layouts, and use SQL migrations, research views,
-              validation triggers and row-level security to support reliable data
-              and public read-only access.
+              I build web applications, databases and AI integrations using Cursor, Claude Code and Codex. When I see a business problem, I build a working first version myself and test whether it solves the problem before larger investments are made. I also make sure the result can be trusted: correct calculations, clean data, and pages that work on any screen. The case studies show the technical details.
             </p>
           </div>
         </section>
@@ -77,14 +69,7 @@ export default function About() {
           <div className="about-section-body">
             <h3>Trust in high-stakes situations</h3>
             <p>
-              Before my business career, I worked as an ER nurse at Helsinki
-              University Hospital and as an interpreter for the U.S. military in
-              Iraq.
-            </p>
-            <p>
-              Both roles required earning trust quickly. That experience shapes how
-              I approach technology: a tool only creates value when people trust it
-              and use it.
+              Before my business career, I worked as an ER nurse at Helsinki University Hospital and as an interpreter for the U.S. military in Iraq. Both roles taught me to earn trust fast: listen first, and truly understand what the other person needs. That is still how I sell. It also shapes how I see AI: a tool only creates value when people trust it and use it.
             </p>
           </div>
         </section>

@@ -32,8 +32,7 @@ export default function ToolsSection() {
       <header className="tools-header">
         <h2 id="tools-heading">Tools I work with</h2>
         <p>
-          The core tools I use to build interfaces, collect and organize data,
-          connect AI services, and deploy practical applications.
+          The tools behind my projects. Using them myself helps me understand the products I sell and the teams that build them.
         </p>
       </header>
       <div className="tools-grid">
