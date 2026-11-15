@@ -40,6 +40,11 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        <ul className="hero-proof-points">
+          <li>Built sales from zero</li>
+          <li>Rebuilt incentives for a 70+ person sales team</li>
+          <li>Founded and sold an agency</li>
+        </ul>
       </section>
       <SelectedProjects />
       <ContactSection className="home-contact" />
