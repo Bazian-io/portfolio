@@ -1,8 +1,10 @@
+import type { ToolGroup } from "./tools";
+
 export type Project = {
   slug: string;
   title: string;
   category?: string;
-  technologies: string[];
+  technologyGroups: ToolGroup[];
   summary?: string;
   cardProblem?: string;
   cardSolution?: string;
@@ -31,21 +33,32 @@ export const projects: Project[] = [
     slug: "gcc-healthtech-news",
     title: "GCC HealthTech News",
     category: "News automation",
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "SQL",
-      "Tailwind CSS",
-      "Node.js",
-      "Supabase",
-      "PostgreSQL",
-      "Claude API",
-      "Vercel",
-      "GitHub",
-      "Cursor",
-      "Claude Code",
-      "Codex",
+    technologyGroups: [
+      {
+        id: "build-with-ai",
+        title: "Build with AI",
+        tools: ["Cursor", "Claude Code", "Codex"],
+      },
+      {
+        id: "languages",
+        title: "Languages",
+        tools: ["TypeScript", "SQL"],
+      },
+      {
+        id: "front-end",
+        title: "Front end",
+        tools: ["Next.js", "React", "Tailwind CSS"],
+      },
+      {
+        id: "back-end-data",
+        title: "Back end and data",
+        tools: ["Node.js", "Supabase", "PostgreSQL", "Claude API"],
+      },
+      {
+        id: "deployment",
+        title: "Deployment and version control",
+        tools: ["Vercel", "GitHub"],
+      },
     ],
     summary:
       "An automated GCC HealthTech briefing combining multi-source news, regional filters, and weekly topic trends in one reading experience.",
@@ -126,19 +139,32 @@ export const projects: Project[] = [
     slug: "institutional-ownership-tracker",
     title: "Institutional Ownership Tracker",
     category: "Ownership research",
-    technologies: [
-      "Next.js",
-      "React",
-      "TypeScript",
-      "SQL",
-      "Node.js",
-      "Supabase",
-      "PostgreSQL",
-      "Vercel",
-      "GitHub",
-      "Cursor",
-      "Claude Code",
-      "Codex",
+    technologyGroups: [
+      {
+        id: "build-with-ai",
+        title: "Build with AI",
+        tools: ["Cursor", "Claude Code", "Codex"],
+      },
+      {
+        id: "languages",
+        title: "Languages",
+        tools: ["TypeScript", "SQL"],
+      },
+      {
+        id: "front-end",
+        title: "Front end",
+        tools: ["Next.js", "React"],
+      },
+      {
+        id: "back-end-data",
+        title: "Back end and data",
+        tools: ["Node.js", "Supabase", "PostgreSQL"],
+      },
+      {
+        id: "deployment",
+        title: "Deployment and version control",
+        tools: ["Vercel", "GitHub"],
+      },
     ],
     summary:
       "A stock research platform built with Next.js, React and TypeScript, with validated SEC filings, historical holdings, quarterly changes and investor comparisons.",

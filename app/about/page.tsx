@@ -81,7 +81,7 @@ export default function About() {
               <li>
                 <h3>Master’s degree</h3>
                 <p>
-                  International Business &amp; Entrepreneurship, LUT University.
+                  Master of Science in Economics and Business Administration, International Business &amp; Entrepreneurship, LUT University.
                 </p>
               </li>
               <li>
@@ -99,7 +99,7 @@ export default function About() {
               </li>
               <li>
                 <h3>Languages</h3>
-                <p>Finnish, Kurdish, and English, with intermediate Arabic.</p>
+                <p>Finnish and Kurdish (native), English (fluent), Arabic (intermediate).</p>
               </li>
             </ul>
           </div>

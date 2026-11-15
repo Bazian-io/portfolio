@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { projects } from "../data/projects";
 import ProjectScreenshot from "./project-screenshot";
+import ProjectTechnologies from "./project-technologies";
 
 export default function SelectedProjects({
   headingLevel = "h2",
@@ -24,13 +25,18 @@ export default function SelectedProjects({
       message: "Project card technologies",
       data: {
         headingLevel,
-        cards: projects.map((project) => ({
-          slug: project.slug,
-          tagCount: project.technologies.length,
-          lastTag: project.technologies.at(-1),
-          hasCodex: project.technologies.includes("Codex"),
-          technologies: project.technologies,
-        })),
+        cards: projects.map((project) => {
+          const technologies = project.technologyGroups.flatMap(
+            (group) => group.tools,
+          );
+          return {
+            slug: project.slug,
+            tagCount: technologies.length,
+            lastTag: technologies.at(-1),
+            hasCodex: technologies.includes("Codex"),
+            technologies,
+          };
+        }),
       },
       timestamp: Date.now(),
     }),
@@ -96,11 +102,10 @@ export default function SelectedProjects({
                     </div>
                   )}
                 </dl>
-                <ul className="project-tags" aria-label="Technologies">
-                  {project.technologies.map((technology) => (
-                    <li key={technology}>{technology}</li>
-                  ))}
-                </ul>
+                <ProjectTechnologies
+                  groups={project.technologyGroups}
+                  variant="card"
+                />
                 <span className="project-card-action">
                   View case study <span aria-hidden="true">→</span>
                 </span>

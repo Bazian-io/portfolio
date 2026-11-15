@@ -426,6 +426,26 @@ button {
   font-weight: 500;
 }
 
+.project-technology-groups {
+  display: grid;
+  gap: 1rem;
+}
+
+.project-technology-groups-card {
+  margin-top: 1.5rem;
+}
+
+.project-technology-group-label {
+  margin: 0 0 0.5rem;
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.project-technology-groups .project-tags {
+  margin-top: 0;
+}
+
 .technology-stack {
   margin-top: 2.5rem;
 }

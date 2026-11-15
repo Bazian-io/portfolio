@@ -2,6 +2,7 @@ import Link from "next/link";
 import { projects, type Project } from "../data/projects";
 import CaseStudyNavigation from "./case-study-navigation";
 import ProjectScreenshot from "./project-screenshot";
+import ProjectTechnologies from "./project-technologies";
 import ScreenshotViewer from "./screenshot-viewer";
 import TechnicalFlow from "./technical-flow";
 
@@ -28,7 +29,9 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
       message: "Case study Codex placement",
       data: {
         slug: project.slug,
-        hasCodexInTechnologies: project.technologies.includes("Codex"),
+        hasCodexInTechnologies: project.technologyGroups.some((group) =>
+          group.tools.includes("Codex"),
+        ),
         technicalFlow: project.technicalFlow ?? [],
         technicalFlowHasCodex: (project.technicalFlow ?? []).some((step) =>
           step.technologies.includes("Codex"),
@@ -146,11 +149,10 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
               <div className="tools-group-header">
                 <h3 id="technology-stack-heading">Built with</h3>
               </div>
-              <ul className="tool-list" aria-label="Technologies">
-                {project.technologies.map((technology) => (
-                  <li key={technology}>{technology}</li>
-                ))}
-              </ul>
+              <ProjectTechnologies
+                groups={project.technologyGroups}
+                variant="case-study"
+              />
             </section>
           </div>
         </section>

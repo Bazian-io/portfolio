@@ -1,4 +1,4 @@
-type ToolGroup = {
+export type ToolGroup = {
   id: string;
   title: string;
   tools: string[];
