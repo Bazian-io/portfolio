@@ -27,7 +27,7 @@ const siteUrl =
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${profile.name} | Sales Leader Building with AI`,
+    default: `${profile.name} | Sales leadership. Practical AI.`,
     template: `%s | ${profile.name}`,
   },
   description: profile.description,
