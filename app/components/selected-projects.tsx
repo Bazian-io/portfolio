@@ -82,19 +82,10 @@ export default function SelectedProjects({
                 >
                   {project.title}
                 </CardHeading>
+                <p className="project-card-lead">
+                  {project.cardLead ?? project.summary}
+                </p>
                 <dl className="project-card-description">
-                  <div>
-                    <dt>Business problem</dt>
-                    <dd>{project.cardProblem ?? "Business context coming soon."}</dd>
-                  </div>
-                  <div>
-                    <dt>What I built</dt>
-                    <dd>
-                      {project.cardSolution ??
-                        project.summary ??
-                        "Project details coming soon."}
-                    </dd>
-                  </div>
                   {project.cardMotivation && (
                     <div>
                       <dt>Why I built it</dt>
@@ -102,10 +93,13 @@ export default function SelectedProjects({
                     </div>
                   )}
                 </dl>
-                <ProjectTechnologies
-                  groups={project.technologyGroups}
-                  variant="card"
-                />
+                <div className="project-card-stack" role="group" aria-label="Tech stack">
+                  <p className="project-card-stack-heading">Tech stack</p>
+                  <ProjectTechnologies
+                    groups={project.technologyGroups}
+                    variant="card"
+                  />
+                </div>
                 <span className="project-card-action">
                   View case study <span aria-hidden="true">→</span>
                 </span>

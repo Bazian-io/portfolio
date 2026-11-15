@@ -6,6 +6,7 @@ export type Project = {
   category?: string;
   technologyGroups: ToolGroup[];
   summary?: string;
+  cardLead?: string;
   cardProblem?: string;
   cardSolution?: string;
   cardMotivation?: string;
@@ -62,6 +63,8 @@ export const projects: Project[] = [
     ],
     summary:
       "An automated GCC HealthTech briefing combining multi-source news, regional filters, and weekly topic trends in one reading experience.",
+    cardLead:
+      "A specialized news feed for consultants and companies working in GCC health tech.",
     cardProblem:
       "Following GCC HealthTech news means checking multiple publishers and separating repeated coverage.",
     cardSolution:
@@ -168,6 +171,8 @@ export const projects: Project[] = [
     ],
     summary:
       "A stock research platform built with Next.js, React and TypeScript, with validated SEC filings, historical holdings, quarterly changes and investor comparisons.",
+    cardLead:
+      "A research tool that follows institutional investors and the stocks they hold.",
     cardProblem:
       "Comparing institutional holdings means working through quarterly filings, amendments, and different security identifiers.",
     cardSolution:

@@ -12,7 +12,14 @@ export default function ProjectTechnologies({
       className={`project-technology-groups${variant === "card" ? " project-technology-groups-card" : ""}`}
     >
       {groups.map((group) => (
-        <div key={group.id}>
+        <div
+          key={group.id}
+          className={
+            variant === "card"
+              ? `project-technology-row${group.id === "build-with-ai" ? " project-technology-row-ai" : ""}`
+              : undefined
+          }
+        >
           <p className="project-technology-group-label">{group.title}</p>
           <ul
             className={variant === "card" ? "project-tags" : "tool-list"}
