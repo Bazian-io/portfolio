@@ -80,7 +80,7 @@ export default function About() {
               <li>
                 <h3 className="building-label">Quality</h3>
                 <p>
-                  I also make sure the result can be trusted: correct calculations, clean data, and pages that work on any screen.
+                  I make sure the result can be trusted: correct calculations, clean data, and pages that work on any screen.
                 </p>
               </li>
             </ul>
@@ -92,12 +92,11 @@ export default function About() {
         <section className="about-section" aria-labelledby="background-heading">
           <h2 id="background-heading">Background</h2>
           <div className="about-section-body">
-            <h3>Trust in high-stakes situations</h3>
             <blockquote className="background-quote">
               Listen first, and truly understand what the other person needs.
             </blockquote>
             <p>
-              Before my business career, I worked as an ER nurse at Helsinki University Hospital and as an interpreter for the U.S. military in Iraq. Both roles taught me to earn trust fast: listen first, and truly understand what the other person needs. That is still how I sell. It also shapes how I see AI: a tool only creates value when people trust it and use it.
+              Before my business career, I worked as an ER nurse at Helsinki University Hospital and as an interpreter for the U.S. military in Iraq. Both roles taught me to earn trust fast, and that is still how I sell. It also shapes how I see AI: a tool only creates value when people trust it and use it.
             </p>
           </div>
         </section>

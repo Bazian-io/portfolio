@@ -42,6 +42,9 @@
   --project-card-columns: minmax(0, 1fr);
   --project-card-gap: var(--space-6);
   --technology-label-width: 16rem;
+  --about-section-columns: minmax(0, 1fr);
+  --section-title-gap: var(--space-6);
+  --body-measure: 62ch;
   background: var(--bg);
   color: var(--soft);
   font-family: var(--font-inter), Arial, sans-serif;
@@ -870,7 +873,8 @@ button {
 }
 
 .about-section h2,
-.contact-section h2 {
+.contact-section h2,
+.tools-header h2 {
   margin: 0;
   color: var(--text);
   font-size: var(--section-size);
@@ -946,6 +950,8 @@ button {
 
 .building-principles li {
   min-width: var(--space-0);
+  padding-top: var(--space-4);
+  border-top: var(--hairline-width) solid var(--hair);
 }
 
 .about-building .building-label {
@@ -1093,20 +1099,25 @@ button {
   border-top: 1px solid var(--hair);
 }
 
-.tools-header h2 {
-  margin: 0;
-  font-size: var(--section-size);
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-}
-
 .tools-header p {
   max-width: 62ch;
   margin: 1rem 0 0;
   color: var(--soft);
   font-size: 1em;
   line-height: 1.6;
+}
+
+.about-content > section {
+  grid-template-columns: var(--about-section-columns);
+  gap: var(--section-title-gap);
+}
+
+.about .tools-header p {
+  margin-top: var(--section-title-gap);
+}
+
+.about p {
+  max-width: var(--body-measure);
 }
 
 .tools-grid {
