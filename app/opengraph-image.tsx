@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { profile } from "./data/profile";
+import theme from "./data/theme.json";
 
 export const alt = "Bazian Prudens — Applied AI, automation, and business solutions";
 export const size = { width: 1200, height: 630 };
@@ -16,8 +17,8 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           padding: 72,
-          background: "#faf9f6",
-          color: "#252925",
+          background: theme["--bg"],
+          color: theme["--text"],
           fontFamily: "sans-serif",
         }}
       >
@@ -30,8 +31,8 @@ export default function OpenGraphImage() {
               width: 64,
               height: 64,
               borderRadius: 14,
-              background: "#365a4a",
-              color: "#faf9f6",
+              background: theme["--surface"],
+              color: theme["--text"],
               fontSize: 30,
               fontWeight: 700,
               letterSpacing: -1,
@@ -39,7 +40,7 @@ export default function OpenGraphImage() {
           >
             BP
           </div>
-          <span style={{ color: "#686c65", fontSize: 24 }}>Portfolio</span>
+          <span style={{ color: theme["--muted"], fontSize: 24 }}>Portfolio</span>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
@@ -57,7 +58,7 @@ export default function OpenGraphImage() {
             style={{
               display: "flex",
               maxWidth: 1000,
-              color: "#686c65",
+              color: theme["--soft"],
               fontSize: 34,
               lineHeight: 1.4,
             }}
@@ -69,8 +70,8 @@ export default function OpenGraphImage() {
           style={{
             display: "flex",
             paddingTop: 24,
-            borderTop: "1px solid #dddfd8",
-            color: "#365a4a",
+            borderTop: `1px solid ${theme["--hair"]}`,
+            color: theme["--tint"],
             fontSize: 24,
           }}
         >

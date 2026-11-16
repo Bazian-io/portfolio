@@ -10,7 +10,7 @@ export default function Home() {
         <div className="hero-identity">
           <h1 id="hero-heading">{profile.name}</h1>
           <p className="hero-introduction">
-            I lead sales and business development, and I build my own tools with AI.
+            I lead sales and business development, and I build my own tools <em>with AI</em>.
           </p>
           <div className="hero-actions">
             <a className="hero-button" href="#projects">

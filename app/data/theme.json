@@ -1,0 +1,13 @@
+{
+  "--bg": "#141617",
+  "--surface": "#191C1E",
+  "--border": "#262A2D",
+  "--hair": "#2B3033",
+  "--text": "#F1F2F1",
+  "--soft": "#D9DCDC",
+  "--muted": "#A1A6AA",
+  "--petrol": "#12323E",
+  "--petrol-hover": "#17404E",
+  "--tint": "#7CC6CE",
+  "--tint-soft": "rgba(124,198,206,.35)"
+}

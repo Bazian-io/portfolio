@@ -14,6 +14,7 @@ export default function ProjectTechnologies({
       {groups.map((group) => (
         <div
           key={group.id}
+          data-technology-group={group.id}
           className={
             variant === "card"
               ? `project-technology-row${group.id === "build-with-ai" ? " project-technology-row-ai" : ""}`

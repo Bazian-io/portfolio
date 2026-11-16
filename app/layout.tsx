@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import DebugCodexVisibility from "./components/debug-codex-visibility";
 import SiteHeader from "./components/site-header";
 import { profile } from "./data/profile";
+import theme from "./data/theme.json";
 import "./globals.css";
 
 const inter = Inter({
@@ -14,6 +15,7 @@ const inter = Inter({
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
   variable: "--font-source-serif",
 });
@@ -44,7 +46,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${sourceSerif.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${sourceSerif.variable}`}
+      style={theme as CSSProperties}
+    >
       <body id="top">
         <a className="skip-link" href="#main-content">
           Skip to content
