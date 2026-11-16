@@ -14,14 +14,19 @@ const navigation = [
 export default function SiteHeader() {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
-  const [heroHeadingVisible, setHeroHeadingVisible] = useState(true);
-  const isHomepage = pathname === "/";
+  const [heroVisible, setHeroVisible] = useState(true);
+  const heroSelector =
+    pathname === "/"
+      ? "#hero-heading"
+      : pathname === "/about"
+        ? ".about-header"
+        : null;
 
   useEffect(() => {
-    if (!isHomepage) return;
+    if (!heroSelector) return;
 
     if (!("IntersectionObserver" in window)) {
-      setHeroHeadingVisible(false);
+      setHeroVisible(false);
       return;
     }
 
@@ -29,24 +34,24 @@ export default function SiteHeader() {
     let resizeObserver: ResizeObserver | undefined;
     let mutationObserver: MutationObserver | undefined;
 
-    const observeHeading = () => {
-      const heading = document.getElementById("hero-heading");
+    const observeHero = () => {
+      const hero = document.querySelector(heroSelector);
       const header = headerRef.current;
-      if (!heading || !header) return false;
+      if (!hero || !header) return false;
 
       const updateObserver = () => {
         intersectionObserver?.disconnect();
         const headerHeight = Math.ceil(header.getBoundingClientRect().height);
-        const headingBounds = heading.getBoundingClientRect();
-        setHeroHeadingVisible(
-          headingBounds.bottom > headerHeight &&
-            headingBounds.top < window.innerHeight,
+        const heroBounds = hero.getBoundingClientRect();
+        setHeroVisible(
+          heroBounds.bottom > headerHeight &&
+            heroBounds.top < window.innerHeight,
         );
         intersectionObserver = new IntersectionObserver(
-          ([entry]) => setHeroHeadingVisible(entry.isIntersecting),
+          ([entry]) => setHeroVisible(entry.isIntersecting),
           { rootMargin: `-${headerHeight}px 0px 0px 0px` },
         );
-        intersectionObserver.observe(heading);
+        intersectionObserver.observe(hero);
       };
 
       updateObserver();
@@ -57,9 +62,9 @@ export default function SiteHeader() {
       return true;
     };
 
-    if (!observeHeading()) {
+    if (!observeHero()) {
       mutationObserver = new MutationObserver(() => {
-        if (observeHeading()) mutationObserver?.disconnect();
+        if (observeHero()) mutationObserver?.disconnect();
       });
       mutationObserver.observe(document.body, { childList: true, subtree: true });
     }
@@ -69,13 +74,13 @@ export default function SiteHeader() {
       resizeObserver?.disconnect();
       mutationObserver?.disconnect();
     };
-  }, [isHomepage]);
+  }, [heroSelector]);
 
   return (
     <header
       ref={headerRef}
-      className={`site-header${isHomepage ? " site-header-home" : ""}`}
-      data-brand-hidden={isHomepage && heroHeadingVisible ? "true" : undefined}
+      className={`site-header${heroSelector ? " site-header-with-hero" : ""}`}
+      data-brand-hidden={heroSelector && heroVisible ? "true" : undefined}
     >
       <div className="container header-inner">
         <Link className="brand" href="/#top" aria-label={`${profile.name} home`}>
