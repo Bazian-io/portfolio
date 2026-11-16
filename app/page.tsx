@@ -36,7 +36,10 @@ export default function Home() {
         </div>
         <div className="hero-support">
           <p className="hero-description">
-            I’ve built sales from zero, rebuilt the incentives of a 70+ person sales team, and founded and sold a communications agency. I also build my own software with AI, from market monitoring to investor research tools. Building it myself shows me how AI products are made, what buyers really need from them, and how to test an idea before a bigger investment is made.
+            I’ve built sales from zero, rebuilt the incentives of a 70+ person sales team, and founded and sold a communications agency.
+          </p>
+          <p className="hero-description">
+            I also build my own software with AI, from market monitoring to investor research tools. Building it myself shows me how AI products are made, what buyers really need from them, and how to test an idea before a bigger investment is made.
           </p>
         </div>
         <ul className="hero-proof-points">

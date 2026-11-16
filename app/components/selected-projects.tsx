@@ -71,6 +71,7 @@ export default function SelectedProjects({
               <ProjectScreenshot
                 title={project.title}
                 screenshot={project.screenshot}
+                sizes="(min-width: 1136px) 544px, (min-width: 896px) 50vw, 100vw"
               />
               <div className="project-card-content">
                 {project.category && (
@@ -93,17 +94,17 @@ export default function SelectedProjects({
                     </div>
                   )}
                 </dl>
-                <div className="project-card-stack" role="group" aria-label="Tech stack">
-                  <p className="project-card-stack-heading">Tech stack</p>
-                  <ProjectTechnologies
-                    groups={project.technologyGroups}
-                    variant="card"
-                  />
-                </div>
-                <span className="project-card-action">
-                  View case study <span aria-hidden="true">→</span>
-                </span>
               </div>
+              <div className="project-card-stack" role="group" aria-label="Tech stack">
+                <p className="project-card-stack-heading">Tech stack</p>
+                <ProjectTechnologies
+                  groups={project.technologyGroups}
+                  variant="card"
+                />
+              </div>
+              <span className="project-card-action">
+                View case study <span aria-hidden="true">→</span>
+              </span>
             </Link>
           </article>
         ))}

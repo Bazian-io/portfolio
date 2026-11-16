@@ -6,7 +6,42 @@
   --card-padding: 22px;
   --hero-size: 40px;
   --section-size: 32px;
-  --hero-lead-size: 18px;
+  --hero-lead-size: 20px;
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --hairline-width: 1px;
+  --radius-card: 14px;
+  --radius-screenshot: 10px;
+  --font-size-small: 14px;
+  --font-size-body: 17px;
+  --font-size-action: 15px;
+  --font-size-label: 12px;
+  --font-size-card-title: 20px;
+  --font-size-figure: 36px;
+  --font-size-quote: 22px;
+  --label-tracking: 0.16em;
+  --line-height-heading: 1.2;
+  --line-height-figure: 1.1;
+  --line-height-label: 1.5;
+  --line-height-quote: 1.4;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --header-min-height: 64px;
+  --control-min-height: 44px;
+  --contact-padding: var(--space-8);
+  --achievement-columns: minmax(0, 1fr);
+  --building-columns: minmax(0, 1fr);
+  --project-card-columns: minmax(0, 1fr);
+  --project-card-gap: var(--space-6);
+  --technology-label-width: 16rem;
   background: var(--bg);
   color: var(--soft);
   font-family: var(--font-inter), Arial, sans-serif;
@@ -122,9 +157,9 @@ button {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  min-height: 6rem;
-  gap: 2rem;
-  padding-block: 1rem;
+  min-height: var(--header-min-height);
+  gap: var(--space-8);
+  padding-block: var(--space-2);
 }
 
 .header-inner nav {
@@ -261,6 +296,10 @@ button {
   line-height: 1.6;
 }
 
+.hero-description + .hero-description {
+  margin-top: var(--space-4);
+}
+
 .hero-proof-points {
   display: grid;
   grid-column: 1 / -1;
@@ -283,8 +322,8 @@ button {
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--soft);
-  font-weight: 400;
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
   gap: 12px;
   font-size: 15px;
   counter-increment: proof;
@@ -394,9 +433,11 @@ button {
 }
 
 .project-card-link {
-  display: flex;
+  display: grid;
   flex: 1;
-  flex-direction: column;
+  grid-template-columns: var(--project-card-columns);
+  gap: var(--project-card-gap);
+  align-items: start;
 }
 
 .project-card-link:focus-visible {
@@ -425,9 +466,11 @@ button {
 .project-card .project-card-action {
   display: inline-flex;
   align-self: flex-start;
+  justify-self: start;
+  grid-column: 1 / -1;
   justify-content: center;
   min-height: 44px;
-  margin-top: 24px;
+  margin-top: var(--space-0);
   padding: 12px 22px;
   border: 1px solid var(--tint-soft);
   border-radius: 999px;
@@ -485,12 +528,17 @@ button {
   object-position: top;
 }
 
+.project-card .project-preview {
+  border: var(--hairline-width) solid var(--border);
+  border-radius: var(--radius-screenshot);
+}
+
 .project-card-content {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px 0 0;
-  container-type: inline-size;
+  min-width: var(--space-0);
+  padding: var(--space-0);
 }
 
 .project-card-title {
@@ -597,13 +645,15 @@ button {
 }
 
 .project-card-stack {
+  grid-column: 1 / -1;
+  container-type: inline-size;
   overflow: visible;
-  margin-top: 24px;
+  margin-top: var(--space-0);
   border: 0;
   border-radius: 0;
   background: transparent;
-  padding-top: 24px;
-  border-top: 1px solid var(--hair);
+  padding-top: var(--space-6);
+  border-top: var(--hairline-width) solid var(--hair);
 }
 
 .project-card-stack-heading {
@@ -622,7 +672,7 @@ button {
   display: grid;
   min-width: 0;
   gap: 0.75rem;
-  padding: 16px 0;
+  padding: var(--space-3) var(--space-0);
 }
 
 .project-technology-row + .project-technology-row {
@@ -651,7 +701,7 @@ button {
 
 @container (min-width: 28rem) {
   .project-technology-row {
-    grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr);
+    grid-template-columns: minmax(0, var(--technology-label-width)) minmax(0, 1fr);
     align-items: start;
     gap: 1rem;
   }
@@ -800,17 +850,15 @@ button {
 .about-section,
 .contact-section {
   display: grid;
-  gap: 1.5rem;
-  padding-block: 32px 0;
-  border-top: 1px solid var(--hair);
+  gap: var(--space-6);
+  padding-block: var(--space-0);
 }
 
 .contact-section {
-  padding: 32px 0 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  border-top: 1px solid var(--hair);
+  padding: var(--contact-padding);
+  border: var(--hairline-width) solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
 }
 
 .contact-section-body p {
@@ -856,11 +904,96 @@ button {
 }
 
 .career-highlights li {
-  padding: 24px 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  border-bottom: 1px solid var(--hair);
+  min-width: var(--space-0);
+  padding: var(--space-7);
+  border: var(--hairline-width) solid var(--border);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.career-highlights {
+  grid-template-columns: var(--achievement-columns);
+}
+
+.career-highlights .career-figure {
+  margin: var(--space-0) var(--space-0) var(--space-4);
+  color: var(--text);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: var(--font-size-figure);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-figure);
+}
+
+.career-highlights h3 {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-heading);
+}
+
+.career-highlights li > p:not(.career-figure) {
+  font-size: var(--font-size-body);
+}
+
+.building-principles {
+  display: grid;
+  grid-template-columns: var(--building-columns);
+  gap: var(--space-8);
+  margin: var(--space-0);
+  padding: var(--space-0);
+  list-style: none;
+}
+
+.building-principles li {
+  min-width: var(--space-0);
+}
+
+.about-building .building-label {
+  margin: var(--space-0) var(--space-0) var(--space-3);
+  color: var(--tint);
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-label);
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+}
+
+.building-case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-min-height);
+  margin-top: var(--space-4);
+  padding-block: var(--space-2);
+  color: var(--text);
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-size: var(--font-size-action);
+  font-weight: var(--font-weight-medium);
+  text-decoration: underline;
+  text-decoration-color: var(--tint-soft);
+  text-decoration-thickness: var(--hairline-width);
+  text-underline-offset: var(--space-1);
+}
+
+.building-case-link:hover {
+  color: var(--tint);
+  text-decoration-color: var(--tint);
+}
+
+.background-quote {
+  margin: var(--space-0) var(--space-0) var(--space-6);
+  color: var(--text);
+  font-family: var(--font-source-serif), Georgia, serif;
+  font-size: var(--font-size-quote);
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-quote);
+}
+
+.about-content > .tools-section {
+  padding-block: var(--space-0);
+  border-top: var(--space-0);
 }
 
 .qualification-panel {
@@ -898,7 +1031,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin: 1.5rem 0 0;
+  margin: var(--space-3) var(--space-0) var(--space-0);
   padding: 0;
   list-style: none;
 }
@@ -938,7 +1071,7 @@ button {
   color: var(--text);
   min-height: 44px;
   padding: 12px 22px;
-  border: 1px solid var(--tint-soft);
+  border: var(--hairline-width) solid var(--tint);
   border-radius: 999px;
   font-family: var(--font-inter), Arial, sans-serif;
   font-size: 15px;
@@ -1493,8 +1626,7 @@ a.project-resource-primary:hover {
   }
 
   .qualification-grid,
-  .tools-grid,
-  .project-grid {
+  .tools-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1546,6 +1678,11 @@ a.project-resource-primary:hover {
     grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
     column-gap: clamp(2rem, 4vw, 4rem);
   }
+
+  .about-commercial,
+  .about-building {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 @media (min-width: 64rem) {
@@ -1583,8 +1720,8 @@ a.project-resource-primary:hover {
   min-height: 6rem;
   padding-block: 1.5rem;
   color: var(--muted);
-  font-size: 14px;
-  font-weight: 400;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-regular);
 }
 
 .footer-inner p {
@@ -1611,13 +1748,13 @@ a.project-resource-primary:hover {
   align-items: center;
   min-width: 2.75rem;
   min-height: 2.75rem;
-  color: var(--text);
-  font-size: 14px;
+  color: var(--muted);
+  font-size: var(--font-size-small);
   text-decoration: underline;
   text-decoration-color: var(--tint-soft);
   text-underline-offset: 4px;
   font-family: var(--font-inter), Arial, sans-serif;
-  font-weight: 500;
+  font-weight: var(--font-weight-regular);
   text-decoration-thickness: 1px;
 }
 
@@ -1677,6 +1814,7 @@ a.project-resource-primary:hover {
 @media (max-width: 40rem) {
   .project-card .project-card-action {
     align-self: stretch;
+    justify-self: stretch;
     justify-content: space-between;
   }
 
@@ -1692,8 +1830,8 @@ a.project-resource-primary:hover {
   .header-inner {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
-    padding-block: 1.25rem;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
   }
 
   .header-inner nav {
@@ -1742,7 +1880,7 @@ h3 {
   font-family: var(--font-source-serif), Georgia, serif;
   font-size: 16px;
   font-style: italic;
-  font-weight: 400;
+  font-weight: var(--font-weight-regular);
 }
 
 .hero-proof-points li + li {
@@ -1790,6 +1928,12 @@ h3 {
     --card-padding: 28px;
     --hero-size: 56px;
     --section-size: 40px;
-    --hero-lead-size: 20px;
+    --hero-lead-size: 24px;
+    --font-size-quote: 28px;
+    --contact-padding: var(--space-12);
+    --achievement-columns: repeat(2, minmax(0, 1fr));
+    --building-columns: repeat(3, minmax(0, 1fr));
+    --project-card-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+    --project-card-gap: var(--space-8);
   }
 }
