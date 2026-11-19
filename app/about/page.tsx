@@ -46,7 +46,7 @@ export default function About() {
             </li>
             <li>
               <p className="career-figure">€40k → €400k</p>
-              <h3>Opening a new market on a small budget</h3>
+              <h3>Winning first customers in a new market</h3>
               <p>
                 I designed a partnership between Divaco, a mental performance consultancy and seven university researchers that turned €40k in cash into a project worth an estimated €400k. In the UAE, more than 100 companies took a free pilot and more than 10 became paying customers.
               </p>
@@ -96,7 +96,7 @@ export default function About() {
               Listen first, and truly understand what the other person needs.
             </blockquote>
             <p>
-              Before my business career, I worked as an ER nurse at Helsinki University Hospital and as an interpreter for the U.S. military in Iraq. Both roles taught me to earn trust fast, and that is still how I sell. It also shapes how I see AI: a tool only creates value when people trust it and use it.
+              Before my business career, I worked as an acute care nurse at Helsinki University Hospital and as an interpreter for the U.S. military in Iraq. Both roles taught me to earn trust fast, and that is still how I sell. It also shapes how I see AI: a tool only creates value when people trust it and use it.
             </p>
           </div>
         </section>
