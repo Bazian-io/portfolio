@@ -1,6 +1,6 @@
 .technical-flow .technical-flow-steps {
   --flow-gap: 1.75rem;
-  --flow-marker: 1.75rem;
+  --flow-marker: calc(1.75 * var(--case-study-number-size));
   --flow-center: calc(var(--space-4) + var(--flow-marker) / 2);
   gap: var(--flow-gap);
 }

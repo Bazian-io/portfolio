@@ -17,18 +17,13 @@
     display: block;
     visibility: hidden;
     margin-top: var(--space-4);
-    color: var(--tint);
-    font-size: var(--font-size-label);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--about-counter-size);
+    line-height: 1.1;
     font-variant-numeric: tabular-nums;
   }
 
   .about-commercial[data-tracking] .commercial-counter {
     visibility: visible;
-  }
-
-  .about-commercial .career-highlights {
-    grid-template-columns: minmax(0, 1fr);
   }
 
   @media (prefers-reduced-motion: no-preference) {
