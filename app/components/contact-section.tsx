@@ -1,9 +1,9 @@
 import { profile } from "../data/profile";
 
-export default function ContactSection({ className = "" }: { className?: string }) {
+export default function ContactSection() {
   return (
     <section
-      className={`contact-section ${className}`}
+      className="contact-section band--light"
       aria-labelledby="contact-heading"
     >
       <h2 id="contact-heading">Get in touch</h2>

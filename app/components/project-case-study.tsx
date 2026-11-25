@@ -44,46 +44,50 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
 
   return (
     <article className="case-study" aria-labelledby="case-study-title">
-      <Link className="case-study-back" href="/projects">
-        <span aria-hidden="true">←</span> All projects
-      </Link>
-      <header className="case-study-header">
-        <p className="hero-eyebrow">Project case study</p>
-        <h1 className="case-study-title" id="case-study-title">
-          {project.title}
-        </h1>
-        <ul className="project-resources" aria-label="Explore the project">
-          {resources.map(({ label, url, primary }) => (
-            <li key={label}>
-              {url ? (
-                <a
-                  className={`project-resource${primary ? " project-resource-primary" : ""}`}
-                  href={url}
-                >
-                  <span className="project-resource-label">{label}</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              ) : (
-                <div className="project-resource">
-                  <span className="project-resource-label">{label}</span>
-                  <span className="project-resource-status">Link coming soon</span>
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
-      </header>
+      <div className="container">
+        <Link className="case-study-back" href="/projects">
+          <span aria-hidden="true">←</span> All projects
+        </Link>
+        <header className="case-study-header">
+          <p className="hero-eyebrow">Project case study</p>
+          <h1 className="case-study-title" id="case-study-title">
+            {project.title}
+          </h1>
+          <ul className="project-resources" aria-label="Explore the project">
+            {resources.map(({ label, url, primary }) => (
+              <li key={label}>
+                {url ? (
+                  <a
+                    className={`project-resource${primary ? " project-resource-primary" : ""}`}
+                    href={url}
+                  >
+                    <span className="project-resource-label">{label}</span>
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <div className="project-resource">
+                    <span className="project-resource-label">{label}</span>
+                    <span className="project-resource-status">Link coming soon</span>
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </header>
+      </div>
       <CaseStudyNavigation />
-      {project.screenshot ? (
-        <ScreenshotViewer title={project.title} screenshot={project.screenshot} />
-      ) : (
-        <ProjectScreenshot
-          title={project.title}
-          sizes="(min-width: 1216px) 1120px, 90vw"
-          className="case-study-screenshot"
-        />
-      )}
-      <div className="case-study-sections">
+      <div className="case-study-media container">
+        {project.screenshot ? (
+          <ScreenshotViewer title={project.title} screenshot={project.screenshot} />
+        ) : (
+          <ProjectScreenshot
+            title={project.title}
+            sizes="(min-width: 1216px) 1120px, 90vw"
+            className="case-study-screenshot"
+          />
+        )}
+      </div>
+      <div className="band--light">
         <section
           className="case-study-section"
           id="overview"
@@ -112,54 +116,54 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
             </p>
           </div>
         </section>
-        <section
-          className="case-study-section"
-          id="technical-implementation"
-          tabIndex={-1}
-          aria-labelledby="implementation-heading"
-        >
-          <h2 id="implementation-heading">Technical implementation</h2>
-          <div className="case-study-body">
-            {!!project.technicalFlow?.length && (
-              <TechnicalFlow
-                steps={project.technicalFlow}
-                note={project.technicalFlowNote}
-              />
-            )}
-            {project.implementation?.length ? (
-              <ul className="implementation-list">
-                {project.implementation.map(({ title, description }) => (
-                  <li key={title}>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>
-                Implementation details coming soon. This section will describe the
-                technologies, AI tools, automation, APIs, and infrastructure used,
-                where applicable.
-              </p>
-            )}
-            <section
-              className="technology-stack tools-group"
-              aria-labelledby="technology-stack-heading"
-            >
-              <div className="tools-group-header">
-                <h3 id="technology-stack-heading">Built with</h3>
-              </div>
-              <ProjectTechnologies
-                groups={project.technologyGroups}
-                variant="case-study"
-              />
-            </section>
-          </div>
-        </section>
       </div>
+      <section
+        className="case-study-section container"
+        id="technical-implementation"
+        tabIndex={-1}
+        aria-labelledby="implementation-heading"
+      >
+        <h2 id="implementation-heading">Technical implementation</h2>
+        <div className="case-study-body">
+          {!!project.technicalFlow?.length && (
+            <TechnicalFlow
+              steps={project.technicalFlow}
+              note={project.technicalFlowNote}
+            />
+          )}
+          {project.implementation?.length ? (
+            <ul className="implementation-list">
+              {project.implementation.map(({ title, description }) => (
+                <li key={title}>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              Implementation details coming soon. This section will describe the
+              technologies, AI tools, automation, APIs, and infrastructure used,
+              where applicable.
+            </p>
+          )}
+          <section
+            className="technology-stack tools-group"
+            aria-labelledby="technology-stack-heading"
+          >
+            <div className="tools-group-header">
+              <h3 id="technology-stack-heading">Built with</h3>
+            </div>
+            <ProjectTechnologies
+              groups={project.technologyGroups}
+              variant="case-study"
+            />
+          </section>
+        </div>
+      </section>
       {relatedProject && (
         <section
-          className="related-project"
+          className="related-project container"
           aria-labelledby="related-project-heading"
         >
           <h2 id="related-project-heading">Explore another project</h2>

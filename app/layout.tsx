@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <SiteHeader />
         <DebugCodexVisibility />
-        <main className="container main-content" id="main-content" tabIndex={-1}>
+        <main className="main-content" id="main-content" tabIndex={-1}>
           {children}
         </main>
         <footer className="site-footer">

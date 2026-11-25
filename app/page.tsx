@@ -6,7 +6,7 @@ import { profile } from "./data/profile";
 export default function Home() {
   return (
     <div className="home">
-      <section className="hero" aria-labelledby="hero-heading">
+      <section className="hero container" aria-labelledby="hero-heading">
         <div className="hero-identity">
           <h1 id="hero-heading">{profile.name}</h1>
           <p className="hero-introduction">
@@ -42,14 +42,16 @@ export default function Home() {
             I also build my own software with AI, from market monitoring to investor research tools. Building it myself shows me how AI products are made, what buyers really need from them, and how to test an idea before a bigger investment is made.
           </p>
         </div>
+      </section>
+      <div className="band--light">
         <ul className="hero-proof-points">
           <li>Built sales from zero</li>
           <li>Rebuilt incentives for a 70+ person sales organization</li>
           <li>Founded and sold an agency</li>
         </ul>
-      </section>
+      </div>
       <SelectedProjects />
-      <ContactSection className="home-contact" />
+      <ContactSection />
     </div>
   );
 }

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <section className="about" aria-labelledby="about-heading">
-      <header className="about-header">
+      <header className="about-header container">
         <p className="hero-eyebrow">About {profile.name}</p>
         <h1 className="about-title" id="about-heading">
           Sales leadership.
@@ -24,7 +24,7 @@ export default function About() {
         </p>
       </header>
       <div className="about-content">
-        <section className="about-section about-commercial" aria-labelledby="commercial-heading">
+        <section className="about-section about-commercial band--light" aria-labelledby="commercial-heading">
           <h2 id="commercial-heading">Commercial leadership</h2>
           <ul className="career-highlights about-section-body">
             <li>
@@ -61,7 +61,7 @@ export default function About() {
             </li>
           </ul>
         </section>
-        <section className="about-section about-building" aria-labelledby="building-heading">
+        <section className="about-section about-building container" aria-labelledby="building-heading">
           <h2 id="building-heading">Building with AI</h2>
           <div className="about-section-body">
             <ul className="building-principles">
@@ -89,7 +89,7 @@ export default function About() {
             </Link>
           </div>
         </section>
-        <section className="about-section" aria-labelledby="background-heading">
+        <section className="about-section band--light" aria-labelledby="background-heading">
           <h2 id="background-heading">Background</h2>
           <div className="about-section-body">
             <blockquote className="background-quote">
@@ -101,7 +101,7 @@ export default function About() {
           </div>
         </section>
         <ToolsSection />
-        <section className="about-section" aria-labelledby="education-heading">
+        <section className="about-section container" aria-labelledby="education-heading">
           <h2 id="education-heading">Education and credentials</h2>
           <div className="qualification-panel about-section-body">
             <ul className="qualification-grid">
@@ -131,7 +131,7 @@ export default function About() {
             </ul>
           </div>
         </section>
-        <ContactSection className="about-contact" />
+        <ContactSection />
       </div>
     </section>
   );

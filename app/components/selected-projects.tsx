@@ -45,7 +45,7 @@ export default function SelectedProjects({
 
   return (
     <section
-      className="selected-projects"
+      className="selected-projects container"
       id="projects"
       aria-labelledby="selected-projects-heading"
       tabIndex={-1}

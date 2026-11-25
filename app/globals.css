@@ -2,6 +2,7 @@
   /* Palette: app/data/theme.json, applied as CSS variables on html. */
   color-scheme: dark;
   --page-gutter: 16px;
+  --content-width: min(1080px, 100% - var(--page-gutter) * 2);
   --section-space: 64px;
   --card-padding: 22px;
   --hero-size: 40px;
@@ -36,7 +37,6 @@
   --font-weight-semibold: 600;
   --header-min-height: 64px;
   --control-min-height: 44px;
-  --contact-padding: var(--space-8);
   --achievement-columns: minmax(0, 1fr);
   --building-columns: minmax(0, 1fr);
   --project-card-columns: minmax(0, 1fr);
@@ -103,8 +103,30 @@ button {
 }
 
 .container {
-  width: min(1080px, calc(100% - var(--page-gutter) * 2));
+  width: var(--content-width);
   margin-inline: auto;
+}
+
+.band--light {
+  --bg: #EEF0EF;
+  --text: #141617;
+  --soft: #3B4246;
+  --muted: #5E666B;
+  --border: #D6DADA;
+  --hair: #D6DADA;
+  --surface: #FFFFFF;
+  --tint: #12323E;
+  --tint-soft: rgba(18, 50, 62, .35);
+  color-scheme: light;
+  padding-block: var(--section-space);
+  padding-inline: calc((100% - var(--content-width)) / 2);
+  background: var(--bg);
+  color: var(--soft);
+}
+
+.band--light :focus-visible {
+  outline: 2px solid var(--tint);
+  outline-offset: 3px;
 }
 
 .skip-link {
@@ -228,18 +250,14 @@ button {
   padding-block: 64px;
 }
 
-.main-content:has(> .home) {
-  padding-block: 64px;
-  padding-top: 48px;
-}
-
-.main-content:has(> .about) {
-  padding-top: 48px;
+.main-content:has(> .home, > .about) {
+  padding-block: 48px 0;
 }
 
 .hero {
   display: grid;
   gap: 32px;
+  margin-bottom: var(--section-space);
 }
 
 .hero-identity,
@@ -305,15 +323,10 @@ button {
 
 .hero-proof-points {
   display: grid;
-  grid-column: 1 / -1;
   grid-template-columns: minmax(0, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 0;
-  margin: 16px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--hair);
-  border-bottom: 1px solid var(--hair);
   counter-reset: proof;
 }
 
@@ -321,15 +334,20 @@ button {
   display: flex;
   align-items: center;
   min-width: 0;
-  padding: 20px 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
+  padding-block: var(--space-4);
   color: var(--text);
   font-weight: var(--font-weight-medium);
   gap: 12px;
   font-size: 15px;
   counter-increment: proof;
+}
+
+.hero-proof-points li:first-child {
+  padding-block-start: 0;
+}
+
+.hero-proof-points li:last-child {
+  padding-block-end: 0;
 }
 
 .hero-actions {
@@ -389,10 +407,13 @@ button {
   scroll-margin-top: 2rem;
 }
 
-.hero + .selected-projects {
-  margin-top: var(--section-space);
-  padding-top: 0;
-  border-top: 0;
+.home > .selected-projects,
+.about-content > .container {
+  padding-block: var(--section-space);
+}
+
+.about-content > .container + .container {
+  padding-block-start: 0;
 }
 
 .section-heading {
@@ -415,19 +436,25 @@ button {
   line-height: 1.6;
 }
 
+.project-card,
+.related-project-link {
+  overflow: hidden;
+  border: 1px solid var(--border-raised);
+  border-radius: var(--radius-card);
+  background: var(--surface-raised);
+}
+
 .project-card {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface);
   padding: var(--card-padding);
 }
 
-.project-card:hover,
-.project-card:focus-within {
-  border-color: var(--hair);
+@media (hover: hover) {
+  .project-card:hover,
+  .related-project-link:hover {
+    border-color: #46505A;
+  }
 }
 
 .project-card:focus-within {
@@ -854,22 +881,10 @@ button {
 .contact-section {
   display: grid;
   gap: var(--space-6);
-  padding-block: var(--space-0);
-}
-
-.contact-section {
-  padding: var(--contact-padding);
-  border: var(--hairline-width) solid var(--border);
-  border-radius: var(--radius-card);
-  background: var(--surface);
 }
 
 .contact-section-body p {
   color: var(--soft);
-}
-
-.about-contact {
-  margin-top: var(--section-space);
 }
 
 .about-section h2,
@@ -998,7 +1013,6 @@ button {
 }
 
 .about-content > .tools-section {
-  padding-block: var(--space-0);
   border-top: var(--space-0);
 }
 
@@ -1040,10 +1054,6 @@ button {
   margin: var(--space-3) var(--space-0) var(--space-0);
   padding: 0;
   list-style: none;
-}
-
-.home-contact {
-  margin-top: var(--section-space);
 }
 
 .contact-link {
@@ -1202,7 +1212,7 @@ button {
   z-index: 2;
   top: 0;
   margin-top: 1.75rem;
-  padding: 0.5rem;
+  padding-block: 0.5rem;
   border: 0;
   border-radius: 0;
   background: var(--bg);
@@ -1214,7 +1224,7 @@ button {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem;
-  margin: 0;
+  margin-block: 0;
   padding: 0;
   list-style: none;
 }
@@ -1398,16 +1408,24 @@ button {
   max-width: none;
 }
 
-.case-study-sections {
-  margin-top: var(--section-space);
+.case-study-media {
+  padding-bottom: var(--section-space);
 }
 
 .case-study-section {
   display: grid;
   gap: 1rem;
-  padding-block: 32px 0;
-  border-top: 1px solid var(--hair);
   scroll-margin-top: var(--case-study-scroll-offset, 6rem);
+}
+
+.case-study-section + .case-study-section {
+  margin-top: var(--section-space);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--tint);
+}
+
+.band--light + .case-study-section {
+  margin-top: var(--section-space);
 }
 
 .case-study-section h2 {
@@ -1479,6 +1497,11 @@ a.project-resource-primary:hover {
   border-color: var(--tint);
   background: var(--petrol-hover);
   color: var(--text);
+}
+
+.band--light a:is(.hero-button, .contact-link-primary, .project-resource-primary) {
+  border: 0;
+  color: #F1F2F1;
 }
 
 .project-resource-label {
@@ -1599,15 +1622,6 @@ a.project-resource-primary:hover {
 .related-project-link {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: var(--surface);
-}
-
-.related-project-link:hover,
-.related-project-link:focus-visible {
-  border-color: var(--tint);
 }
 
 .related-project-content {
@@ -1785,8 +1799,7 @@ a.project-resource-primary:hover {
   .contact-link,
   .case-study-navigation a,
   .screenshot-control,
-  .screenshot-enlarge-label,
-  .related-project-link {
+  .screenshot-enlarge-label {
     transition:
       color 150ms ease,
       background-color 150ms ease,
@@ -1800,21 +1813,24 @@ a.project-resource-primary:hover {
       border-color 150ms ease;
   }
 
-  .project-card {
-    transition: border-color 150ms ease;
+  .project-card,
+  .related-project-link {
+    transition: transform 200ms ease-out, border-color 200ms ease-out;
   }
 
   .project-card-action span {
     transition: transform 180ms ease;
   }
 
-
   .project-card:focus-within .project-card-action span {
     transform: translateX(4px);
   }
 
-  @media (hover: hover) and (pointer: fine) {
-
+  @media (hover: hover) {
+    .project-card:hover,
+    .related-project-link:hover {
+      transform: translateY(-4px);
+    }
 
     .project-card:hover .project-card-action span {
       transform: translateX(4px);
@@ -1823,6 +1839,10 @@ a.project-resource-primary:hover {
 }
 
 @media (max-width: 40rem) {
+  .home > .selected-projects {
+    scroll-margin-top: var(--header-min-height);
+  }
+
   .project-card .project-card-action {
     align-self: stretch;
     justify-self: stretch;
@@ -1895,12 +1915,7 @@ h3 {
 }
 
 .hero-proof-points li + li {
-  border-top: 1px solid var(--hair);
-}
-
-.about-content > * + *,
-.case-study-section + .case-study-section {
-  margin-top: var(--section-space);
+  border-top: 1px solid var(--tint);
 }
 
 .tools-grid .tools-group h3,
@@ -1923,12 +1938,17 @@ h3 {
 
 @media (min-width: 48rem) {
   .hero-proof-points li {
-    padding: 20px 24px;
+    padding: 0 var(--space-6) 0 0;
   }
 
   .hero-proof-points li + li {
     border-top: 0;
-    border-left: 1px solid var(--hair);
+    border-left: 1px solid var(--tint);
+    padding-left: var(--space-6);
+  }
+
+  .hero-proof-points li:last-child {
+    padding-right: 0;
   }
 }
 
@@ -1941,7 +1961,6 @@ h3 {
     --section-size: 40px;
     --hero-lead-size: 24px;
     --font-size-quote: 28px;
-    --contact-padding: var(--space-12);
     --achievement-columns: repeat(2, minmax(0, 1fr));
     --building-columns: repeat(3, minmax(0, 1fr));
     --project-card-columns: minmax(0, 1.22fr) minmax(0, 1fr);

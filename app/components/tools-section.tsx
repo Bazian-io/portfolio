@@ -28,7 +28,7 @@ export default function ToolsSection() {
   }).catch(() => {});
   // #endregion
   return (
-    <section className="tools-section" aria-labelledby="tools-heading">
+    <section className="tools-section container" aria-labelledby="tools-heading">
       <header className="tools-header">
         <h2 id="tools-heading">Tools I work with</h2>
         <p>

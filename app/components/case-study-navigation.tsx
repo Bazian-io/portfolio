@@ -62,7 +62,7 @@ export default function CaseStudyNavigation() {
       aria-label="Case study sections"
       ref={navRef}
     >
-      <ul>
+      <ul className="container">
         {sections.map(({ id, label }) => (
           <li key={id}>
             <a

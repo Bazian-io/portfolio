@@ -1,7 +1,9 @@
 {
   "--bg": "#141617",
   "--surface": "#191C1E",
+  "--surface-raised": "#1F2428",
   "--border": "#262A2D",
+  "--border-raised": "#343B41",
   "--hair": "#2B3033",
   "--text": "#F1F2F1",
   "--soft": "#D9DCDC",
