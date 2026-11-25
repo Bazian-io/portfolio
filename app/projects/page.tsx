@@ -4,7 +4,12 @@ import SelectedProjects from "../components/selected-projects";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Explore Bazian Prudens’s practical projects in regional news monitoring, institutional ownership research, and business technology.",
+    "Explore Bazian Prudens’s practical projects in GCC healthtech market monitoring, institutional ownership research, and business technology.",
+  twitter: {
+    card: "summary_large_image",
+    description:
+      "Explore Bazian Prudens’s practical projects in regional news monitoring, institutional ownership research, and business technology.",
+  },
 };
 
 export default function Projects() {

@@ -117,6 +117,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 ))}
               </ol>
             )}
+            {project.overviewClosing && <p>{project.overviewClosing}</p>}
           </div>
         </section>
         <section

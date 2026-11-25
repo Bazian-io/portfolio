@@ -6,12 +6,14 @@ export type Project = {
   category?: string;
   technologyGroups: ToolGroup[];
   summary?: string;
+  metaDescription?: string;
   cardLead?: string;
   cardProblem?: string;
   cardSolution?: string;
   cardMotivation?: string;
   overview?: string;
   overviewPoints?: string[];
+  overviewClosing?: string;
   businessProblem?: string;
   technicalFlow?: {
     label: string;
@@ -64,6 +66,8 @@ export const projects: Project[] = [
     ],
     summary:
       "An automated GCC HealthTech briefing combining multi-source news, regional filters, and weekly topic trends in one reading experience.",
+    metaDescription:
+      "Market monitoring platform for international consultants and companies following the GCC healthtech market.",
     cardLead:
       "A specialized market monitoring platform for consultants and companies working in GCC health tech.",
     cardProblem:
@@ -95,19 +99,24 @@ export const projects: Project[] = [
     ],
     implementation: [
       {
-        title: "Clean Data",
+        title: "Data Collection",
         description:
-          "The platform automatically collects news every day, removes duplicate articles and leaves missing information blank rather than guessing.",
+          "The platform automatically collects news every day through APIs and RSS feeds. Duplicate articles are filtered out, and missing publication details are left blank rather than guessed.",
       },
       {
-        title: "Weekly Trends",
+        title: "Database",
         description:
-          "The platform identifies common topics across different news sources. A topic is only highlighted as a trend when at least two different publishers have covered it.",
+          "Supabase and PostgreSQL store and organise articles, publication dates, sources and categories. This allows news to be filtered by country, topic and publication date.",
       },
       {
-        title: "AI-Assisted Review",
+        title: "Weekly Trends and AI Review",
         description:
-          "Claude can check whether news headlines are relevant to the platform, suggest a category and explain its reasoning. The final publishing decision remains with a human.",
+          "The platform identifies common topics across news sources and highlights weekly trends. Claude can review headlines, assess their relevance and suggest a category. The final publishing decision remains with a human.",
+      },
+      {
+        title: "Development and Hosting",
+        description:
+          "Next.js, React and TypeScript power the website and its news feed. The platform was built in Cursor with AI-assisted development, GitHub keeps track of changes, and Vercel hosts the application.",
       },
     ],
     screenshot: {
@@ -150,6 +159,8 @@ export const projects: Project[] = [
     ],
     summary:
       "A stock research platform built with Next.js, React and TypeScript, with validated SEC filings, historical holdings, quarterly changes and investor comparisons.",
+    metaDescription:
+      "An investment research platform for following institutional investors and their portfolios, based on SEC filings.",
     cardLead:
       "A research tool that follows institutional investors and the stocks they hold.",
     cardProblem:
@@ -159,52 +170,41 @@ export const projects: Project[] = [
     cardMotivation:
       "Our investor group needed one tool to follow them quarter by quarter. I built it to our exact needs, so we do our own analysis instead of digging through filings.",
     overview:
-      "A research tool built for our investor group to follow institutional investors and the stocks they hold. It turns SEC filings into connected investor and stock views: what each tracked investor reports holding, how that changes from quarter to quarter, and how two portfolios compare. It lets us do our own analysis instead of digging through filings. The figures show reported holdings, not confirmed trades.",
+      "An investment research platform built for our investor group to follow institutional investors and their portfolios. It allows us to:",
+    overviewPoints: [
+      "Explore which stocks institutions hold",
+      "Track changes in their portfolios over time",
+      "Compare investment positions across different institutions",
+    ],
+    overviewClosing: "All holdings data is based on publicly reported SEC filings.",
     businessProblem:
-      "Quarterly filings spread portfolio information across many documents, including amendments and different security identifiers. Comparing them by hand makes it harder to follow an investor’s history or see which institutions report holding the same stock. The project organizes validated filings into connected investor and stock views, with links back to the SEC source documents.",
+      "Although institutional investment data is publicly available, it is scattered across thousands of financial documents. Analyzing these documents manually makes it difficult to track changes in investment portfolios, identify common holdings across institutions and spot broader investment trends.",
     technicalFlow: [
       { label: "Data sources", technologies: "SEC EDGAR · OpenFIGI · Nasdaq" },
       { label: "Collection", technologies: "Node.js" },
       { label: "Database", technologies: "Supabase · PostgreSQL" },
       { label: "Interface", technologies: "Next.js · React · TypeScript" },
     ],
-    technicalFlowNote:
-      "Collectors run through local commands, and the public web application has read-only database access. Short-interest collection and scheduled automation remain planned.",
     implementation: [
       {
-        title: "Interface",
+        title: "Data Collection",
         description:
-          "Next.js and React provide the pages, dashboards and navigation. TypeScript checks that data is used consistently, helping catch mistakes before release. CSS Modules keep styles separate between pages, and responsive CSS adapts the interface to phones, tablets and computers.",
-      },
-      {
-        title: "Charts",
-        description:
-          "Custom SVG graphics and CSS charts show historical holdings and portfolio values over time, so readers can compare quarters visually.",
+          "Holdings are collected from SEC EDGAR filings. Each import is checked against the filing’s totals to catch incomplete data, and amended filings are reconciled, so comparisons use the corrected numbers. OpenFIGI and Nasdaq reference data help match the same stock across different identifiers.",
       },
       {
         title: "Database",
         description:
-          "Supabase and PostgreSQL store investors, securities, filings and historical holdings in linked tables, so each position can be traced to its investor and source filing. SQL migrations record database changes so the structure can be updated consistently. Research views combine stored records into useful summaries. Validation triggers check rules when data is written, helping prevent inconsistent records. Row-level security controls access to records; together with read-only permissions, it lets the public read research data without changing it.",
+          "Supabase and PostgreSQL store investors, stocks, filings and historical holdings in linked tables, so every position can be traced back to its investor and source filing. Visitors can explore the data but can’t change it.",
       },
       {
-        title: "Data collection and processing",
+        title: "Changes shown over time",
         description:
-          "Node.js collectors import filings from SEC EDGAR, the data source for reported holdings. JSON and XML are the formats in which external data arrives; fast-xml-parser reads XML into records the application can process. Row counts and reported values are checked against filing totals to catch incomplete imports. Amendments are reconciled so comparisons account for corrected filings, while original source records remain available for tracing the data. OpenFIGI and Nasdaq are reference data sources used to help match stock identities.",
+          "Next.js, React and TypeScript power the website and its dashboards. Charts show historical holdings and portfolio values over time, so quarters can be compared visually.",
       },
       {
-        title: "Testing and quality",
+        title: "Development and Hosting",
         description:
-          "The Node.js test runner checks calculations and data-processing rules, so changes do not silently alter results. PGlite runs PostgreSQL database tests locally, checking that validation and access rules behave as intended. ESLint flags common code problems, and TypeScript checks for inconsistent data types before release. Headless Chrome runs browser checks without an open browser window, verifying that pages work and fit different screen sizes.",
-      },
-      {
-        title: "Development workflow",
-        description:
-          "Built in Cursor, using Claude Code and Codex to assist with planning, coding, debugging and reviews. Git and GitHub keep a history of source changes, making updates traceable. npm manages dependencies and repeatable development commands.",
-      },
-      {
-        title: "Hosting",
-        description:
-          "Vercel hosts the web application, making the research dashboards available through a browser.",
+          "Built in Cursor with Claude Code and Codex. Automated tests check the calculations and data rules, so changes don’t silently alter results. GitHub keeps track of changes, and Vercel hosts the platform.",
       },
     ],
     screenshot: {

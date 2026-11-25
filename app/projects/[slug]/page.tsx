@@ -21,12 +21,15 @@ export async function generateMetadata({
 
   if (!project) notFound();
 
+  const summary =
+    project.summary ??
+    project.overview ??
+    `Project case study for ${project.title}.`;
+
   return {
     title: project.title,
-    description:
-      project.summary ??
-      project.overview ??
-      `Project case study for ${project.title}.`,
+    description: project.metaDescription ?? summary,
+    twitter: { card: "summary_large_image", description: summary },
   };
 }
 
