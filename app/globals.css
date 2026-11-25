@@ -39,8 +39,6 @@
   --control-min-height: 44px;
   --achievement-columns: minmax(0, 1fr);
   --building-columns: minmax(0, 1fr);
-  --project-card-columns: minmax(0, 1fr);
-  --project-card-gap: var(--space-6);
   --technology-label-width: 16rem;
   --about-section-columns: minmax(0, 1fr);
   --section-title-gap: var(--space-6);
@@ -424,12 +422,6 @@ button {
   line-height: 1.1;
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 24px;
-}
-
 .selected-projects-intro {
   margin: 0 0 2rem;
   color: var(--soft);
@@ -461,18 +453,6 @@ button {
 .project-card:focus-within {
   outline: 2px solid var(--tint);
   outline-offset: 3px;
-}
-
-.project-card-link {
-  display: grid;
-  flex: 1;
-  grid-template-columns: var(--project-card-columns);
-  gap: var(--project-card-gap);
-  align-items: start;
-}
-
-.project-card-link:focus-visible {
-  outline: none;
 }
 
 .project-card-action {
@@ -512,17 +492,6 @@ button {
   font-weight: 500;
   line-height: 1.5;
   text-decoration: none;
-}
-
-.project-card-link:hover .project-card-action,
-.project-card-link:focus-visible .project-card-action {
-  border-color: var(--tint);
-  background: var(--petrol-hover);
-}
-
-.project-card-link:focus-visible .project-card-action {
-  outline: 2px solid var(--tint);
-  outline-offset: 3px;
 }
 
 .project-preview {
@@ -1965,7 +1934,5 @@ h3 {
     --font-size-quote: 28px;
     --achievement-columns: repeat(2, minmax(0, 1fr));
     --building-columns: repeat(3, minmax(0, 1fr));
-    --project-card-columns: minmax(0, 1.22fr) minmax(0, 1fr);
-    --project-card-gap: var(--space-8);
   }
 }

@@ -1,0 +1,273 @@
+.showcase-panel {
+  display: none;
+}
+
+.showcase-stories {
+  display: grid;
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.showcase-story {
+  gap: var(--space-6);
+  min-width: 0;
+}
+
+.showcase-screenshot {
+  display: block;
+  min-width: 0;
+  background: var(--surface-raised);
+}
+
+.showcase-story > .showcase-screenshot {
+  position: sticky;
+  z-index: 1;
+  top: var(--visible-header-height);
+}
+
+.showcase-screenshot .project-preview {
+  height: 25svh;
+  aspect-ratio: auto;
+  border-radius: var(--radius-screenshot);
+}
+
+.showcase-screenshot img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.showcase-story > .project-card-action:is(:hover, :focus-visible) {
+  border-color: var(--tint);
+  background: var(--petrol-hover);
+}
+
+.showcase-story > .project-card-action {
+  scroll-margin-top: calc(var(--site-header-height) + 25svh + var(--space-4));
+}
+
+.project-showcase .showcase-story:focus-within {
+  outline: none;
+}
+
+.showcase-screenshot:focus-visible,
+.showcase-story > .project-card-action:focus-visible {
+  outline: 2px solid var(--tint);
+  outline-offset: 3px;
+}
+
+@media (width < 900px), (height < 640px) {
+  /* The card reveals as a unit in the stacked layout. */
+  .reveal-js .showcase-story > :is(.project-card-content, .project-card-action)[data-reveal] {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .showcase-story > .showcase-screenshot {
+    transition: top var(--header-slide);
+  }
+
+  .project-showcase .project-technology-row li {
+    transition:
+      color 200ms var(--motion-ease),
+      background-color 200ms var(--motion-ease),
+      border-color 200ms var(--motion-ease);
+  }
+
+  [data-tags-ready] .showcase-story .project-technology-row:not([data-lit]) li {
+    color: var(--muted);
+    border-color: var(--hair);
+    background: transparent;
+  }
+
+  @media (hover: hover) {
+    /* Keep the sticky link's position independent of its frame's hover lift. */
+    .project-showcase .showcase-story:hover {
+      transform: none;
+    }
+
+    .showcase-story > .showcase-screenshot {
+      padding-top: var(--space-1);
+      margin-top: calc(0px - var(--space-1));
+    }
+
+    .showcase-screenshot .project-preview {
+      transition: transform 200ms ease-out, border-color 200ms ease-out;
+    }
+
+    .showcase-screenshot:hover .project-preview {
+      transform: translateY(-4px);
+      border-color: #46505A;
+    }
+  }
+}
+
+@media (min-width: 900px) and (min-height: 640px) {
+  .reveal-js {
+    .project-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+      gap: clamp(24px, 3vw, 48px);
+    }
+
+    .showcase-panel {
+      position: sticky;
+      top: calc(var(--visible-header-height) + var(--space-6));
+      align-self: start;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) max-content;
+      row-gap: var(--space-4);
+      min-width: 0;
+      max-height: calc(100svh - var(--site-header-height) - 2 * var(--space-6));
+      padding: clamp(16px, 1.6vw, 24px);
+      border: 1px solid var(--border-raised);
+      border-radius: var(--radius-card);
+      background: var(--surface-raised);
+    }
+
+    /* All layers contribute to the stack row, keeping its position steady at each switch. */
+    .showcase-slide {
+      display: grid;
+      grid-area: 1 / 1 / span 2;
+      grid-template-rows: subgrid;
+      min-width: 0;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .showcase-slide[data-active] {
+      z-index: 1;
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .showcase-slide .showcase-screenshot {
+      height: 38svh;
+      max-height: 100%;
+      min-height: 0;
+    }
+
+    .showcase-slide .project-preview {
+      height: 100%;
+    }
+
+    .showcase-slide .project-card-stack {
+      padding: 0;
+      border: 0;
+    }
+
+    .showcase-slide .project-card-stack-heading {
+      padding-bottom: var(--space-2);
+    }
+
+    .showcase-slide .project-technology-row {
+      grid-template-columns: minmax(0, 30%) minmax(0, 1fr);
+      align-items: center;
+      gap: var(--space-3);
+      padding-block: var(--space-2);
+    }
+
+    .showcase-slide .project-technology-row:last-child {
+      padding-bottom: 0;
+    }
+
+    .showcase-slide .project-tags {
+      gap: var(--space-1);
+    }
+
+    .showcase-stories {
+      gap: var(--space-8);
+    }
+
+    .project-showcase .showcase-story {
+      min-height: 75svh;
+      align-items: start;
+      padding: 0;
+      overflow: visible;
+      border: 0;
+      background: transparent;
+    }
+
+    /* The text reveals independently; the midpoint tracker reads this steady box. */
+    .project-showcase .showcase-story[data-reveal] {
+      opacity: 1;
+      translate: none;
+      transition: none;
+    }
+
+    .showcase-story > .showcase-screenshot,
+    .showcase-story > .project-card-stack {
+      display: none;
+    }
+
+    .showcase-story > .project-card-content {
+      flex: none;
+    }
+
+    .showcase-story > .project-card-action {
+      scroll-margin-top: calc(var(--site-header-height) + var(--space-4));
+    }
+
+    .showcase-story:not([data-active]) .project-card-content {
+      --text: var(--muted);
+      --soft: var(--muted);
+      --tint: var(--muted);
+    }
+
+    .showcase-story:not([data-active]) > .project-card-action {
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .showcase-panel {
+        transition: top var(--header-slide);
+      }
+
+      .showcase-panel[data-reveal] {
+        transition: top var(--header-slide), var(--reveal-transitions);
+      }
+
+      .showcase-panel[data-reveal]:focus-within {
+        transition: top var(--header-slide);
+      }
+
+      .showcase-slide {
+        transition: opacity 400ms var(--motion-ease), visibility 0s 400ms;
+      }
+
+      .showcase-slide[data-active] {
+        transition-delay: 0s;
+      }
+
+      .showcase-slide .project-preview img {
+        scale: 1.04;
+        transition: scale 0s 400ms;
+      }
+
+      .showcase-slide[data-active] .project-preview img {
+        scale: 1;
+        transition: scale 1200ms var(--motion-ease);
+      }
+
+      .showcase-slide[data-active] .project-technology-row li {
+        transition-delay: calc(var(--group-index, 0) * 120ms);
+      }
+
+      .showcase-slide:not([data-active]) .project-technology-row li,
+      .showcase-panel:not([data-revealed]):not(:focus-within) .project-technology-row li {
+        color: var(--muted);
+        border-color: var(--hair);
+        background: transparent;
+        transition: none;
+      }
+
+      .showcase-panel:not([data-revealed]):not(:focus-within) .showcase-slide img {
+        scale: 1.04;
+      }
+    }
+  }
+}

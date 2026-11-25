@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Project } from "../data/projects";
 
 export default function ProjectTechnologies({
@@ -11,10 +12,11 @@ export default function ProjectTechnologies({
     <div
       className={`project-technology-groups${variant === "card" ? " project-technology-groups-card" : ""}`}
     >
-      {groups.map((group) => (
+      {groups.map((group, index) => (
         <div
           key={group.id}
           data-technology-group={group.id}
+          style={variant === "card" ? { "--group-index": index } as CSSProperties : undefined}
           className={
             variant === "card"
               ? `project-technology-row${group.id === "build-with-ai" ? " project-technology-row-ai" : ""}`

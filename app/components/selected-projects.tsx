@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { projects } from "../data/projects";
+import ProjectShowcase from "./project-showcase";
 import ProjectScreenshot from "./project-screenshot";
 import ProjectTechnologies from "./project-technologies";
 
@@ -44,6 +45,52 @@ export default function SelectedProjects({
   }).catch(() => {});
   // #endregion
 
+  const items = projects.map((project) => {
+    const headingId = `${project.slug}-heading`;
+    const href = `/projects/${project.slug}`;
+
+    return {
+      slug: project.slug,
+      screenshot: (
+        <Link className="showcase-screenshot" href={href} aria-labelledby={headingId}>
+          <ProjectScreenshot
+            title={project.title}
+            screenshot={project.screenshot}
+            sizes="(min-width: 900px) and (min-height: 640px) min(55vw, 590px), (min-width: 1130px) 1080px, 100vw"
+          />
+        </Link>
+      ),
+      stack: (
+        <div className="project-card-stack" role="group" aria-label="Tech stack">
+          <p className="project-card-stack-heading">Tech stack</p>
+          <ProjectTechnologies groups={project.technologyGroups} variant="card" />
+        </div>
+      ),
+      text: (
+        <div className="project-card-content" data-reveal>
+          {project.category && <p className="project-card-category">{project.category}</p>}
+          <CardHeading className="project-card-title" id={headingId}>
+            {project.title}
+          </CardHeading>
+          <p className="project-card-lead">{project.cardLead ?? project.summary}</p>
+          <dl className="project-card-description">
+            {project.cardMotivation && (
+              <div>
+                <dt>Why I built it</dt>
+                <dd>{project.cardMotivation}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      ),
+      action: (
+        <Link className="project-card-action" href={href} aria-describedby={headingId} data-reveal>
+          View case study <span aria-hidden="true">→</span>
+        </Link>
+      ),
+    };
+  });
+
   return (
     <section
       className="selected-projects container"
@@ -66,60 +113,7 @@ export default function SelectedProjects({
       >
         Both projects started from a real need of a specific group of users. That is also how I approach sales.
       </p>
-      <div className="project-grid">
-        {projects.map((project) => (
-          <article
-            className="project-card reveal-settle"
-            data-reveal
-            key={project.slug}
-            aria-labelledby={`${project.slug}-heading`}
-          >
-            <Link
-              className="project-card-link"
-              href={`/projects/${project.slug}`}
-              aria-labelledby={`${project.slug}-heading`}
-            >
-              <ProjectScreenshot
-                title={project.title}
-                screenshot={project.screenshot}
-                sizes="(min-width: 1136px) 544px, (min-width: 896px) 50vw, 100vw"
-              />
-              <div className="project-card-content">
-                {project.category && (
-                  <p className="project-card-category">{project.category}</p>
-                )}
-                <CardHeading
-                  className="project-card-title"
-                  id={`${project.slug}-heading`}
-                >
-                  {project.title}
-                </CardHeading>
-                <p className="project-card-lead">
-                  {project.cardLead ?? project.summary}
-                </p>
-                <dl className="project-card-description">
-                  {project.cardMotivation && (
-                    <div>
-                      <dt>Why I built it</dt>
-                      <dd>{project.cardMotivation}</dd>
-                    </div>
-                  )}
-                </dl>
-              </div>
-              <div className="project-card-stack" role="group" aria-label="Tech stack">
-                <p className="project-card-stack-heading">Tech stack</p>
-                <ProjectTechnologies
-                  groups={project.technologyGroups}
-                  variant="card"
-                />
-              </div>
-              <span className="project-card-action">
-                View case study <span aria-hidden="true">→</span>
-              </span>
-            </Link>
-          </article>
-        ))}
-      </div>
+      <ProjectShowcase items={items} />
     </section>
   );
 }

@@ -55,8 +55,7 @@
   .selected-projects-intro[data-reveal],
   .contact-section-body > p,
   .related-project-link { --motion-index: 1; }
-  [data-opening="2"],
-  .home .project-card { --motion-index: 2; }
+  [data-opening="2"] { --motion-index: 2; }
   [data-opening="3"],
   .building-case-link { --motion-index: 3; }
   [data-opening="4"] { --motion-index: 4; }
@@ -90,7 +89,7 @@
     transition: var(--reveal-transitions);
   }
 
-  .reveal-js :is(.project-card, .related-project-link) {
+  .reveal-js .related-project-link {
     transition: var(--card-hover-transitions), var(--reveal-transitions);
   }
 
@@ -116,11 +115,11 @@
   }
 
   @supports (animation-timeline: view()) {
-    :is(.project-card, .related-project-link) .project-preview-image {
+    .related-project-link .project-preview-image {
       view-timeline-name: --preview-frame;
     }
 
-    :is(.project-card, .related-project-link) .project-preview-pan {
+    .related-project-link .project-preview-pan {
       inset-block: -24px;
       animation: pan-preview linear both;
       animation-timeline: --preview-frame;

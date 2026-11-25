@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import { useMidpointItem } from "../components/use-midpoint-item";
 
 const highlights = [
   {
@@ -27,45 +28,7 @@ const highlights = [
 
 export default function CommercialLeadership() {
   const listRef = useRef<HTMLUListElement>(null);
-  const [active, setActive] = useState<number | null>(null);
-
-  useEffect(() => {
-    const list = listRef.current;
-    if (!list) return;
-    const cards = Array.from(list.children);
-    const desktop = window.matchMedia("(min-width: 900px)");
-    let frame = 0;
-
-    function measure() {
-      frame = 0;
-      const middle = window.innerHeight / 2;
-      const bounds = cards.map((card) => card.getBoundingClientRect());
-      const next = bounds.findIndex((card) => card.bottom >= middle);
-      if (next === -1) {
-        setActive(cards.length - 1);
-      } else if (next === 0 || bounds[next].top <= middle) {
-        setActive(next);
-      } else {
-        // In a gap, keep whichever card the reader just left in either direction.
-        setActive((previous) => previous ?? next - 1);
-      }
-    }
-
-    function schedule() {
-      if (desktop.matches && !frame) frame = requestAnimationFrame(measure);
-    }
-
-    schedule();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    document.fonts.addEventListener("loadingdone", schedule);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      document.fonts.removeEventListener("loadingdone", schedule);
-    };
-  }, []);
+  const active = useMidpointItem(listRef, "(min-width: 900px)");
 
   return (
     <section
