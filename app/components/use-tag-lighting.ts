@@ -2,11 +2,15 @@
 
 import { type RefObject, useEffect } from "react";
 
-export function useShowcaseTags(containerRef: RefObject<HTMLElement | null>, desktopQuery: string) {
+export function useTagLighting(
+  containerRef: RefObject<HTMLElement | null>,
+  groupSelector: string,
+  desktopQuery: string,
+) {
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !("IntersectionObserver" in window)) return;
-    const rows = container.querySelectorAll(".showcase-story .project-technology-row");
+    const groups = container.querySelectorAll(groupSelector);
     const desktop = window.matchMedia(desktopQuery);
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let observer: IntersectionObserver | undefined;
@@ -20,17 +24,20 @@ export function useShowcaseTags(containerRef: RefObject<HTMLElement | null>, des
       }
 
       // Include the full page above the line, so jumps and scroll restoration
-      // also light rows that have already passed out of the viewport.
+      // also light groups that have already passed out of the viewport.
       const top = document.documentElement.scrollHeight;
       const bottom = window.innerHeight * 0.3;
       observer = new IntersectionObserver((entries, source) => {
         if (source !== observer) return;
         for (const entry of entries) {
+          // Allow a group to dim on return without animating its initial paint.
+          if (entry.isIntersecting) entry.target.setAttribute("data-tags-entered", "");
           entry.target.toggleAttribute("data-lit", entry.isIntersecting);
+          entry.target.toggleAttribute("data-lit-past", entry.isIntersecting && entry.boundingClientRect.bottom <= 0);
         }
         container.setAttribute("data-tags-ready", "");
       }, { rootMargin: `${top}px 0px -${bottom}px 0px` });
-      for (const row of rows) observer.observe(row);
+      for (const group of groups) observer.observe(group);
     };
 
     observe();
@@ -47,5 +54,5 @@ export function useShowcaseTags(containerRef: RefObject<HTMLElement | null>, des
       desktop.removeEventListener("change", observe);
       reduced.removeEventListener("change", observe);
     };
-  }, [containerRef, desktopQuery]);
+  }, [containerRef, groupSelector, desktopQuery]);
 }

@@ -1,8 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import ContactSection from "./components/contact-section";
+import ProofPoints from "./components/proof-points";
 import SelectedProjects from "./components/selected-projects";
 import { profile } from "./data/profile";
+
+const proofPoints = [
+  "Built sales from zero",
+  "Rebuilt incentives for a 70+ person sales organization",
+  "Founded and sold an agency",
+];
 
 export default function Home() {
   return (
@@ -29,10 +36,10 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-support">
-          <p className="hero-description" data-opening="2">
+          <p className="hero-description" data-opening="2" data-reveal-mobile>
             Building my own software with AI helps me understand how AI products are developed, what problems they solve, and what buyers actually need from them. It also allows me to explore and test ideas before committing to a larger investment.
           </p>
-          <div className="hero-actions" data-opening="3">
+          <div className="hero-actions" data-opening="3" data-reveal-mobile>
             <a className="hero-button" href="#projects">
               View Projects
               <svg
@@ -56,11 +63,17 @@ export default function Home() {
         </div>
       </section>
       <div className="band--light">
-        <ul className="hero-proof-points">
-          <li data-opening="4">Built sales from zero</li>
-          <li data-opening="5">Rebuilt incentives for a 70+ person sales organization</li>
-          <li data-opening="6">Founded and sold an agency</li>
-        </ul>
+        <ProofPoints>
+          {proofPoints.map((point, index) => (
+            <li key={point} data-opening={index + 4}>
+              <span className="hero-proof-number-layers" aria-hidden="true" />
+              <span className="proof-point-copy">
+                {point}
+                <span className="proof-point-copy-overlay" aria-hidden="true" data-copy={point} />
+              </span>
+            </li>
+          ))}
+        </ProofPoints>
       </div>
       <SelectedProjects />
       <ContactSection />

@@ -64,6 +64,35 @@
   }
 }
 
+@keyframes retreat-showcase-preview {
+  from {
+    scale: 1;
+    filter: brightness(1);
+  }
+
+  to {
+    scale: 0.94;
+    filter: brightness(0.6);
+  }
+}
+
+@media (width < 900px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) and (animation-range: exit-crossing 0% exit-crossing 100%) {
+    .showcase-story:not(:last-child) {
+      view-timeline-name: --showcase-story;
+    }
+
+    .showcase-story:not(:last-child) > .showcase-screenshot .project-preview {
+      /* Animate the preview while the sticky link keeps covering the text. */
+      --preview-exit: calc(100% - var(--card-padding) - var(--hairline-width));
+      transform-origin: top center;
+      animation: retreat-showcase-preview linear both;
+      animation-timeline: --showcase-story;
+      animation-range: exit-crossing calc(var(--preview-exit) - 25svh) exit-crossing var(--preview-exit);
+    }
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .showcase-story > .showcase-screenshot {
     transition: top var(--header-slide);

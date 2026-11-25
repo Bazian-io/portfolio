@@ -3,6 +3,7 @@ import { projects, type Project } from "../data/projects";
 import CaseStudyNavigation from "./case-study-navigation";
 import ProjectScreenshot from "./project-screenshot";
 import ProjectTechnologies from "./project-technologies";
+import ProofPoints from "./proof-points";
 import ScreenshotViewer from "./screenshot-viewer";
 import TechnicalFlow from "./technical-flow";
 
@@ -106,16 +107,22 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 "Overview coming soon. This section will introduce the project, its purpose, and its intended users."}
             </p>
             {!!project.overviewPoints?.length && (
-              <ol className="case-study-overview-list" role="list">
-                {project.overviewPoints.map((point, index) => (
-                  <li key={point}>
-                    <span className="case-study-overview-number" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    {point}
-                  </li>
-                ))}
-              </ol>
+              <ProofPoints as="ol">
+                {project.overviewPoints.map((point, index) => {
+                  const number = String(index + 1).padStart(2, "0");
+                  return (
+                    <li key={point}>
+                      <span className="case-study-overview-number" aria-hidden="true" data-number={number}>
+                        {number}
+                      </span>
+                      <span className="proof-point-copy">
+                        {point}
+                        <span className="proof-point-copy-overlay" aria-hidden="true" data-copy={point} />
+                      </span>
+                    </li>
+                  );
+                })}
+              </ProofPoints>
             )}
             {project.overviewClosing && <p>{project.overviewClosing}</p>}
           </div>

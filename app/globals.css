@@ -1754,11 +1754,13 @@ a.project-resource-primary:hover {
   line-height: var(--line-height-body);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 900px) {
   .hero-proof-points {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
+@media (min-width: 48rem) {
   .qualification-grid,
   .tools-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1995,6 +1997,7 @@ h3 {
 }
 
 .hero-proof-points li::before,
+.hero-proof-number-layers,
 .case-study-overview-number,
 .commercial-counter {
   flex-shrink: 0;
@@ -2004,7 +2007,8 @@ h3 {
   font-weight: var(--font-weight-regular);
 }
 
-.hero-proof-points li::before {
+.hero-proof-points li::before,
+.hero-proof-number-layers {
   font-size: var(--proof-number-size);
   line-height: 1.1;
 }
@@ -2036,7 +2040,7 @@ h3 {
   color: var(--text);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 900px) {
   .hero-proof-points li {
     padding: 0 var(--space-6) 0 0;
   }

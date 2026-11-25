@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import { toolGroups } from "../data/tools";
+import TagGroups from "./tag-groups";
 
 export default function ToolsSection() {
   // #region agent log
@@ -32,7 +34,7 @@ export default function ToolsSection() {
       <header className="tools-header">
         <h2 id="tools-heading" data-reveal>Tools I work with</h2>
       </header>
-      <div className="tools-grid" data-reveal-stagger>
+      <TagGroups className="tools-grid" staggerReveals>
         {toolGroups.map((group) => (
           <section
             className="tools-group"
@@ -46,13 +48,13 @@ export default function ToolsSection() {
               )}
             </div>
             <ul className="tool-list">
-              {group.tools.map((tool) => (
-                <li key={tool}>{tool}</li>
+              {group.tools.map((tool, index) => (
+                <li key={tool} style={{ "--tag-index": index } as CSSProperties}>{tool}</li>
               ))}
             </ul>
           </section>
         ))}
-      </div>
+      </TagGroups>
     </section>
   );
 }

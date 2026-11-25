@@ -91,20 +91,8 @@
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .technical-flow {
-      view-timeline: --flow block;
-    }
-
     .technical-flow-steps > li {
-      --flow-interval: calc(40vh / max(1, var(--flow-count) - 1));
-      --flow-stop: calc(20vh + var(--flow-index) * var(--flow-interval));
       --flow-lit: var(--text);
-    }
-
-    .technical-flow-steps > li:not(:last-child)::before {
-      animation: draw-flow-segment linear both;
-      animation-timeline: --flow;
-      animation-range: cover var(--flow-stop) cover calc(var(--flow-stop) + var(--flow-interval));
     }
 
     .technical-flow-steps .technical-flow-number,
@@ -116,14 +104,58 @@
       --flow-lit: var(--soft);
     }
 
-    .technical-flow-steps > li > .technical-flow-arrow {
-      --light-at: calc(var(--flow-stop) + var(--flow-interval) / 2);
+    @media (min-width: 900px) {
+      .technical-flow {
+        view-timeline: --flow block;
+      }
+
+      .technical-flow-steps > li {
+        --flow-interval: calc(40vh / max(1, var(--flow-count) - 1));
+        --flow-stop: calc(20vh + var(--flow-index) * var(--flow-interval));
+      }
+
+      .technical-flow-steps > li:not(:last-child)::before {
+        animation: draw-flow-segment linear both;
+        animation-timeline: --flow;
+        animation-range: cover var(--flow-stop) cover calc(var(--flow-stop) + var(--flow-interval));
+      }
+
+      .technical-flow-steps > li > .technical-flow-arrow {
+        --light-at: calc(var(--flow-stop) + var(--flow-interval) / 2);
+      }
+
+      .technical-flow-steps > li > :is(.technical-flow-number, h3, p, .technical-flow-arrow) {
+        animation: light-flow-step var(--motion-ease) both;
+        animation-timeline: --flow;
+        animation-range: cover calc(var(--light-at, var(--flow-stop)) - 1vh) cover var(--light-at, var(--flow-stop));
+      }
     }
 
-    .technical-flow-steps > li > :is(.technical-flow-number, h3, p, .technical-flow-arrow) {
-      animation: light-flow-step var(--motion-ease) both;
-      animation-timeline: --flow;
-      animation-range: cover calc(var(--light-at, var(--flow-stop)) - 1vh) cover var(--light-at, var(--flow-stop));
+    @supports (view-timeline-inset: 0 40%) and (animation-range: entry-crossing 0% entry-crossing calc(100% + 1px)) {
+      @media (width < 900px) {
+        .technical-flow-steps > li {
+          view-timeline: --flow-step block;
+          view-timeline-inset: 0 40%;
+          --flow-step-at: calc(var(--flow-center) + var(--hairline-width));
+        }
+
+        /* The entry-crossing range is one step's actual height. Add the gap to reach the next marker. */
+        .technical-flow-steps > li:not(:last-child)::before {
+          animation: draw-flow-segment linear both;
+          animation-timeline: --flow-step;
+          animation-range: entry-crossing var(--flow-step-at) entry-crossing calc(100% + var(--flow-step-at) + var(--flow-gap));
+        }
+
+        .technical-flow-steps > li > .technical-flow-arrow {
+          --light-at: calc(50% + var(--flow-step-at) + var(--flow-gap) / 2);
+        }
+
+        .technical-flow-steps > li > :is(.technical-flow-number, h3, p, .technical-flow-arrow) {
+          animation: light-flow-step var(--motion-ease) both;
+          animation-timeline: --flow-step;
+          animation-range: entry-crossing calc(var(--light-at, var(--flow-step-at)) - 1vh) entry-crossing var(--light-at, var(--flow-step-at));
+        }
+      }
     }
   }
 }

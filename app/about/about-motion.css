@@ -32,22 +32,40 @@
       translate: none;
       transition: border-color 400ms var(--motion-ease);
     }
+  }
+}
 
-    .about-commercial .career-highlights :is(h3, p) {
-      transition: color 400ms var(--motion-ease);
+@media (prefers-reduced-motion: no-preference) {
+  .about-commercial .career-highlights :is(h3, p) {
+    transition: color 400ms var(--motion-ease);
+  }
+
+  .about-commercial[data-tracking] li:not([data-active]) {
+    --text: var(--muted);
+    --soft: var(--muted);
+  }
+
+  .about-commercial li[data-active] {
+    border-color: var(--tint);
+  }
+
+  .about-commercial li[data-active] .career-figure {
+    color: var(--tint);
+  }
+
+  @media (width < 900px) {
+    .about-commercial .career-highlights > li {
+      transition: border-color 400ms var(--motion-ease), var(--reveal-transitions, opacity 0s);
     }
 
-    .about-commercial[data-tracking] li:not([data-active]) {
-      --text: var(--muted);
-      --soft: var(--muted);
+    .about-commercial .career-highlights .career-figure {
+      scale: 1;
+      transform-origin: left center;
+      transition: color 400ms var(--motion-ease), scale 400ms var(--motion-ease);
     }
 
-    .about-commercial li[data-active] {
-      border-color: var(--tint);
-    }
-
-    .about-commercial li[data-active] .career-figure {
-      color: var(--tint);
+    .about-commercial[data-tracking] li:not([data-active]) .career-figure {
+      scale: 0.92;
     }
   }
 }

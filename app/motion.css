@@ -10,7 +10,6 @@
 @media (width < 640px) {
   :root {
     --motion-rise: 16px;
-    --band-radius: 20px;
   }
 }
 
@@ -33,6 +32,11 @@
   transform-origin: left;
   transform: scaleX(var(--reading-progress, 0));
   pointer-events: none;
+}
+
+.hero-proof-number-layers,
+.proof-point-copy-overlay {
+  display: none;
 }
 
 @keyframes opening-rise {
@@ -58,6 +62,16 @@
 @keyframes widen-band {
   from { clip-path: inset(0 var(--band-inset) round var(--band-radius)); }
   to { clip-path: inset(0 0 round 0); }
+}
+
+@keyframes grow-band {
+  from { scale: .92; }
+  to { scale: 1; }
+}
+
+@keyframes square-band {
+  from { scale: .92; opacity: 0; }
+  to { scale: 1; opacity: 1; }
 }
 
 @keyframes pan-preview {
@@ -106,10 +120,13 @@
     #technical-implementation .case-study-body { --stagger-offset: 1; }
   }
 
-  .reveal-js :where([data-reveal], [data-reveal-stagger] > *) {
+  .reveal-js :where([data-reveal], [data-reveal-mobile], [data-reveal-stagger] > *) {
     --delay: var(--reveal-delay, calc((var(--motion-index, 0) + var(--stagger-offset, 0)) * var(--motion-stagger)));
     --timing: var(--reveal-duration, var(--motion-duration)) var(--motion-ease) var(--delay);
     --reveal-transitions: opacity var(--timing), translate var(--timing);
+  }
+
+  .reveal-js :where([data-reveal], [data-reveal-stagger] > *) {
     transition: var(--reveal-transitions);
   }
 
@@ -136,6 +153,96 @@
 
   .reveal-js .reveal-settle:focus-within .project-preview-image img {
     transition: none;
+  }
+
+  @media (width < 900px) {
+    .reveal-js .about :is(.career-highlights, .building-principles, .tools-grid, .qualification-grid)[data-reveal-stagger] > * {
+      --reveal-delay: calc(var(--about-item-index, 0) * var(--motion-stagger));
+    }
+
+    .reveal-js [data-reveal-past] {
+      --reveal-duration: 0ms;
+    }
+
+    [data-reveal-mobile],
+    .hero-proof-points > [data-opening] {
+      animation: none;
+    }
+
+    .reveal-js [data-reveal-mobile] {
+      transition: var(--reveal-transitions);
+    }
+
+    .reveal-js [data-reveal-mobile]:not([data-revealed]):not(:focus-within) {
+      opacity: 0;
+      translate: 0 var(--motion-rise);
+    }
+
+    .reveal-js [data-reveal-mobile]:focus-within {
+      transition: none;
+    }
+
+    [data-proof-ready] > li {
+      color: var(--muted);
+    }
+
+    .hero-proof-points[data-proof-ready] > li::before {
+      display: none;
+    }
+
+    .hero-proof-points[data-proof-ready] .hero-proof-number-layers {
+      display: grid;
+    }
+
+    [data-proof-ready] :is(.hero-proof-number-layers, .case-study-overview-number) {
+      color: inherit;
+      scale: .85;
+      transition: scale 400ms var(--motion-ease);
+    }
+
+    .hero-proof-number-layers::before,
+    .hero-proof-number-layers::after {
+      content: counter(proof, decimal-leading-zero);
+      grid-area: 1 / 1;
+    }
+
+    [data-proof-ready] .case-study-overview-number,
+    [data-proof-ready] .proof-point-copy {
+      position: relative;
+    }
+
+    /* Crossfade the ink without changing line boxes or animating color. */
+    [data-proof-ready] .case-study-overview-number::after,
+    [data-proof-ready] .proof-point-copy-overlay {
+      display: block;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    [data-proof-ready] .case-study-overview-number::after { content: attr(data-number); }
+    .proof-point-copy-overlay { color: var(--text); }
+    .proof-point-copy-overlay::before { content: attr(data-copy); }
+    .hero-proof-number-layers::after,
+    .case-study-overview-number::after { color: var(--tint); }
+
+    .hero-proof-number-layers::after,
+    .case-study-overview-number::after,
+    .proof-point-copy-overlay {
+      opacity: 0;
+      transition: opacity 400ms var(--motion-ease);
+    }
+
+    [data-proof-ready] [data-lit] :is(.hero-proof-number-layers, .case-study-overview-number) {
+      scale: 1;
+    }
+
+    [data-lit] > .hero-proof-number-layers::after,
+    [data-lit] > .case-study-overview-number::after,
+    [data-lit] > .proof-point-copy .proof-point-copy-overlay {
+      opacity: 1;
+    }
   }
 
   @supports (animation-timeline: view()) {
@@ -178,10 +285,153 @@
       object-fit: cover;
     }
 
-    .band--light {
-      animation: widen-band linear both;
-      animation-timeline: view();
-      animation-range: cover 0% cover 70vh;
+    @media (min-width: 900px) {
+      .band--light {
+        animation: widen-band linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 70vh;
+      }
     }
+
+  }
+
+  @supports (animation-timeline: view()) and (view-timeline-name: --band-growth) and (animation-range: cover 0% cover 70vh) and (scale: 1) {
+    @media (width < 900px) {
+      /* Keep the scrolling and sticky geometry on the unscaled section. */
+      .band--light {
+        position: relative;
+        isolation: isolate;
+        background: transparent;
+        view-timeline-name: --band-growth;
+      }
+
+      .band--light::before,
+      .band--light::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: var(--bg);
+        pointer-events: none;
+        transform-origin: center;
+        animation: grow-band linear both;
+        animation-timeline: --band-growth;
+        animation-range: cover 0% cover 70vh;
+      }
+
+      .band--light::before { border-radius: 24px; }
+
+      /* The square layer fills the corners without animating their radius. */
+      .band--light::after { animation-name: square-band; }
+    }
+  }
+}
+
+@media (width < 900px) and (prefers-reduced-motion: no-preference) {
+  [data-stagger-tags][data-tags-ready] > [data-tags-entered]:not([data-lit-past]) .tool-list > li {
+    transition:
+      color 200ms var(--motion-ease),
+      background-color 200ms var(--motion-ease),
+      border-color 200ms var(--motion-ease);
+  }
+
+  [data-stagger-tags][data-tags-ready] > :not([data-lit]) .tool-list > li {
+    color: var(--muted);
+    border-color: var(--hair);
+    background: transparent;
+  }
+
+  [data-stagger-tags][data-tags-ready] > [data-lit]:not([data-lit-past]) .tool-list > li {
+    transition-delay: calc(var(--tag-index, 0) * 60ms);
+  }
+}
+
+a,
+button,
+.showcase-story {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (width < 900px) and (hover: none) and (prefers-reduced-motion: no-preference) {
+  :is(
+    .hero-button,
+    .hero-about-link,
+    .contact-link,
+    .building-case-link,
+    .showcase-story,
+    .showcase-screenshot,
+    .showcase-story > .project-card-action,
+    .case-study-back,
+    .project-resource,
+    .case-study-navigation a,
+    .screenshot-trigger,
+    .related-project-link
+  ) {
+    --press-transition: scale var(--press-duration, 200ms) var(--motion-ease);
+  }
+
+  :is(.hero-button, .hero-about-link, .contact-link, .case-study-navigation a, a.project-resource) {
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease,
+      var(--press-transition);
+  }
+
+  .building-case-link[data-reveal] {
+    transition: var(--reveal-transitions, opacity 0s), var(--press-transition);
+  }
+
+  .building-case-link[data-reveal]:focus-within {
+    transition: var(--press-transition);
+  }
+
+  .case-study-back,
+  .screenshot-trigger {
+    transition: var(--press-transition);
+  }
+
+  .case-study .related-project-link {
+    transition: var(--card-hover-transitions), var(--reveal-transitions, opacity 0s), var(--press-transition);
+  }
+
+  .case-study .related-project-link:focus-within {
+    transition: var(--card-hover-transitions), var(--press-transition);
+  }
+
+  .project-showcase .showcase-story {
+    transition: var(--reveal-transitions, var(--card-hover-transitions)), var(--press-transition);
+  }
+
+  .project-showcase .showcase-story:focus-within {
+    transition: var(--card-hover-transitions), var(--press-transition);
+  }
+
+  .project-showcase .showcase-story > .showcase-screenshot {
+    transition: top var(--header-slide), var(--press-transition);
+  }
+
+  .project-showcase .showcase-story > a.project-card-action[data-reveal] {
+    transition: var(--press-transition);
+  }
+
+  :is(
+    .hero-button,
+    .hero-about-link,
+    .contact-link,
+    .building-case-link,
+    .showcase-story > .project-card-action,
+    .case-study-back,
+    a.project-resource,
+    .case-study-navigation a
+  ):active {
+    --press-duration: 120ms;
+    scale: .97;
+  }
+
+  :is(.showcase-story, .showcase-story > .showcase-screenshot, .screenshot-trigger, .related-project-link):active {
+    --press-duration: 120ms;
+    scale: .985;
+  }
+
+  .showcase-story:has(> :is(.showcase-screenshot, .project-card-action):active) {
+    scale: none;
   }
 }

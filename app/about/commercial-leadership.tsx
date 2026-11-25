@@ -28,7 +28,11 @@ const highlights = [
 
 export default function CommercialLeadership() {
   const listRef = useRef<HTMLUListElement>(null);
-  const active = useMidpointItem(listRef, "(min-width: 900px)");
+  const active = useMidpointItem(
+    listRef,
+    "(min-width: 900px), (prefers-reduced-motion: no-preference)",
+    { ignoreItemTranslate: true },
+  );
 
   return (
     <section

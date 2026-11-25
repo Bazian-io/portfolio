@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Project } from "../data/projects";
+import TagGroups from "./tag-groups";
 
 export default function ProjectTechnologies({
   groups,
@@ -8,8 +9,10 @@ export default function ProjectTechnologies({
   groups: Project["technologyGroups"];
   variant: "card" | "case-study";
 }) {
+  const Groups = variant === "card" ? "div" : TagGroups;
+
   return (
-    <div
+    <Groups
       className={`project-technology-groups${variant === "card" ? " project-technology-groups-card" : ""}`}
     >
       {groups.map((group, index) => (
@@ -28,12 +31,17 @@ export default function ProjectTechnologies({
             className={variant === "card" ? "project-tags" : "tool-list"}
             aria-label={group.title}
           >
-            {group.tools.map((tool) => (
-              <li key={tool}>{tool}</li>
+            {group.tools.map((tool, tagIndex) => (
+              <li
+                key={tool}
+                style={variant === "case-study" ? { "--tag-index": tagIndex } as CSSProperties : undefined}
+              >
+                {tool}
+              </li>
             ))}
           </ul>
         </div>
       ))}
-    </div>
+    </Groups>
   );
 }

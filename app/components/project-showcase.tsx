@@ -2,7 +2,7 @@
 
 import { type ReactNode, useLayoutEffect, useRef } from "react";
 import { useMidpointItem } from "./use-midpoint-item";
-import { useShowcaseTags } from "./use-showcase-tags";
+import { useTagLighting } from "./use-tag-lighting";
 import "./project-showcase.css";
 
 const pinnedLayout = "(min-width: 900px) and (min-height: 640px)";
@@ -20,7 +20,7 @@ export default function ProjectShowcase({ items }: { items: ShowcaseItem[] }) {
   const panelRef = useRef<HTMLDivElement>(null);
   const previewHasFocus = useRef(false);
   const active = useMidpointItem(storiesRef, pinnedLayout) ?? 0;
-  useShowcaseTags(storiesRef, pinnedLayout);
+  useTagLighting(storiesRef, ".showcase-story .project-technology-row", pinnedLayout);
 
   // A keyboard user can scroll while the preview link is focused.
   useLayoutEffect(() => {
