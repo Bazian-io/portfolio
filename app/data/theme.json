@@ -10,6 +10,6 @@
   "--muted": "#A1A6AA",
   "--petrol": "#12323E",
   "--petrol-hover": "#17404E",
-  "--tint": "#7CC6CE",
-  "--tint-soft": "rgba(124,198,206,.35)"
+  "--tint": "#5E98A3",
+  "--tint-soft": "rgba(94,152,163,.35)"
 }
