@@ -40,6 +40,21 @@
   to { opacity: 1; translate: none; }
 }
 
+@keyframes reveal-portrait {
+  from { clip-path: inset(100% 0 0 0 round var(--radius-card)); }
+  to { clip-path: inset(0 round var(--radius-card)); }
+}
+
+@keyframes settle-portrait {
+  from { scale: 1.1; }
+  to { scale: 1; }
+}
+
+@keyframes scroll-portrait {
+  from { translate: 0 0; scale: 1; }
+  to { translate: 0 var(--portrait-travel); scale: .96; }
+}
+
 @keyframes widen-band {
   from { clip-path: inset(0 var(--band-inset) round var(--band-radius)); }
   to { clip-path: inset(0 0 round 0); }
@@ -61,6 +76,15 @@
   [data-opening="4"] { --motion-index: 4; }
   [data-opening="5"] { --motion-index: 5; }
   [data-opening="6"] { --motion-index: 6; }
+  [data-opening="7"] { --motion-index: 7; }
+
+  .hero-portrait {
+    animation: reveal-portrait 1100ms var(--motion-ease) 150ms backwards;
+  }
+
+  .hero-portrait-settle {
+    animation: settle-portrait 1400ms var(--motion-ease) 150ms backwards;
+  }
 
   @media (scripting: enabled) {
     [data-opening] {
@@ -115,6 +139,30 @@
   }
 
   @supports (animation-timeline: view()) {
+    /* The track starts at the hero top and ends at the bottom of the photo.
+       Inset the viewport's lower edge to the hero's resting top so progress
+       starts at scrollY 0, including when the mobile intro wraps. */
+    .hero-opening,
+    .hero-portrait {
+      view-timeline-inset: 0 calc(100% - var(--site-header-height) - var(--space-12));
+    }
+
+    .hero-opening { view-timeline-name: --portrait; }
+
+    @media (min-width: 900px) {
+      .hero-portrait { view-timeline-name: --portrait; }
+    }
+
+    .hero-portrait img {
+      --portrait-travel: 24px;
+      /* Offset the zoom origin on short frames so the 4% shrink and travel
+         never use more than the image's 8% top overhang. */
+      transform-origin: center min(50%, calc(100% - var(--portrait-travel) / .04));
+      animation: scroll-portrait linear both;
+      animation-timeline: --portrait;
+      animation-range: cover;
+    }
+
     .related-project-link .project-preview-image {
       view-timeline-name: --preview-frame;
     }

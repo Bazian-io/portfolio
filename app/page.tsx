@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import ContactSection from "./components/contact-section";
 import SelectedProjects from "./components/selected-projects";
@@ -7,12 +8,31 @@ export default function Home() {
   return (
     <div className="home">
       <section className="hero container" aria-labelledby="hero-heading">
-        <div className="hero-identity">
-          <h1 id="hero-heading"><span data-opening="0">{profile.name}</span></h1>
-          <p className="hero-introduction" data-opening="1">
-            I lead sales and business development, and I build my own tools <em>with AI</em>.
+        <div className="hero-opening">
+          <div className="hero-identity">
+            <h1 id="hero-heading"><span data-opening="0">{profile.name}</span></h1>
+            <p className="hero-introduction" data-opening="1">
+              I lead sales and business development, and I build my own tools <em>with AI</em>.
+            </p>
+          </div>
+          <div className="hero-portrait">
+            <div className="hero-portrait-settle">
+              <Image
+                src="/projects/bazian-prudens-portrait.jpg"
+                alt="Portrait of Bazian Prudens"
+                width={1288}
+                height={1610}
+                sizes="(min-width: 900px) min(503px, 65svh, calc(48.72vw - 47px)), (min-width: 56rem) calc(116vw - 56px), calc(116vw - 37px)"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+        <div className="hero-support">
+          <p className="hero-description" data-opening="2">
+            Building my own software with AI helps me understand how AI products are developed, what problems they solve, and what buyers actually need from them. It also allows me to explore and test ideas before committing to a larger investment.
           </p>
-          <div className="hero-actions" data-opening="2">
+          <div className="hero-actions" data-opening="3">
             <a className="hero-button" href="#projects">
               View Projects
               <svg
@@ -33,14 +53,6 @@ export default function Home() {
               About me <span aria-hidden="true">→</span>
             </Link>
           </div>
-        </div>
-        <div className="hero-support" data-opening="3">
-          <p className="hero-description">
-            I’ve built sales from zero, rebuilt the incentives of a 70+ person sales organization, and founded and sold a communications agency.
-          </p>
-          <p className="hero-description">
-            I also build my own software with AI, from market monitoring to investor research tools. Building it myself shows me how AI products are made, what buyers really need from them, and how to test an idea before a bigger investment is made.
-          </p>
         </div>
       </section>
       <div className="band--light">

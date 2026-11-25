@@ -11,6 +11,7 @@ export type Project = {
   cardSolution?: string;
   cardMotivation?: string;
   overview?: string;
+  overviewPoints?: string[];
   businessProblem?: string;
   technicalFlow?: {
     label: string;
@@ -33,7 +34,7 @@ export const projects: Project[] = [
   {
     slug: "gcc-healthtech-news",
     title: "GCC HealthTech News",
-    category: "News automation",
+    category: "Market monitoring",
     technologyGroups: [
       {
         id: "build-with-ai",
@@ -64,17 +65,22 @@ export const projects: Project[] = [
     summary:
       "An automated GCC HealthTech briefing combining multi-source news, regional filters, and weekly topic trends in one reading experience.",
     cardLead:
-      "A specialized news feed for consultants and companies working in GCC health tech.",
+      "A specialized market monitoring platform for consultants and companies working in GCC health tech.",
     cardProblem:
       "Following GCC HealthTech news means checking multiple publishers and separating repeated coverage.",
     cardSolution:
       "A news application with automated collection, country and topic filters, weekly trends, and saved stories.",
     cardMotivation:
-      "Consultants and companies working in GCC health tech from abroad need a specialized news feed, not a general one. I built it for them, and for myself, to follow the region’s technology and policy news.",
+      "Working from abroad, they need more than a general news feed. I built it for them, and for myself, to follow the region’s technology and policy news.",
     overview:
-      "A specialized news feed for consultants and companies working in GCC health tech from abroad. It brings news from hundreds of publishers into one place, with country and topic filters, weekly trends and saved stories. I built it for that group, and for myself, to follow the region’s technology and policy news. The technical details are below.",
+      "Market monitoring platform for international consultants and companies operating in or exploring the GCC healthtech market. It brings news from hundreds of publishers into one place. The project makes it easier to follow, across the GCC:",
+    overviewPoints: [
+      "Market developments",
+      "Technological advancements",
+      "Regulatory changes",
+    ],
     businessProblem:
-      "Monitoring a specialist sector across several markets involves checking multiple publishers and separating repeated coverage from distinct stories. The project brings GCC HealthTech updates into one place, with country and topic filters, original-source links, and saved stories to support a more focused review.",
+      "Market intelligence across the GCC healthtech sector is fragmented across hundreds of sources. It is time-consuming for business professionals to stay informed.",
     technicalFlow: [
       {
         label: "Data sources",
@@ -87,48 +93,21 @@ export const projects: Project[] = [
         technologies: "Next.js · React · TypeScript · Tailwind CSS",
       },
     ],
-    technicalFlowNote:
-      "FreeNewsAPI.ai runs daily and publishes keyword matches. GDELT and RSS collection run separately and save drafts. The optional Claude relevance check is separate from daily collection.",
     implementation: [
       {
-        title: "Interface",
+        title: "Clean Data",
         description:
-          "Next.js and React provide the news pages, search and navigation. TypeScript checks that article data is used consistently, helping catch mistakes before release. Tailwind CSS adapts the layouts to phones, tablets and computers. Country and topic filters help readers find coverage; saved stories stay in the reader’s browser.",
+          "The platform automatically collects news every day, removes duplicate articles and leaves missing information blank rather than guessing.",
       },
       {
-        title: "Charts and trends",
+        title: "Weekly Trends",
         description:
-          "Charts summarize weekly themes using published articles from the latest seven days. A theme needs at least two related stories from different publishers, so thin coverage is shown honestly. These signals follow explicit rules and are separate from the optional Claude relevance check.",
+          "The platform identifies common topics across different news sources. A topic is only highlighted as a trend when at least two different publishers have covered it.",
       },
       {
-        title: "Database",
+        title: "AI-Assisted Review",
         description:
-          "Supabase and PostgreSQL store articles, publisher details, source descriptions, publication status and collection timestamps. SQL migrations record changes to the table structure. Unique URL and slug constraints prevent duplicate records and conflicting article links. Row-level security limits public reads to published articles, while read-only permissions prevent readers from changing the database. Collector credentials stay in backend code. Publisher excerpts are kept separate from any future editorial or AI summary.",
-      },
-      {
-        title: "Data collection and processing",
-        description:
-          "Node.js collectors use three data sources: FreeNewsAPI.ai, GDELT and the Saudi Ministry of Health RSS feed. Vercel Cron runs the FreeNewsAPI.ai collector daily through a secret-protected endpoint; GDELT and RSS collectors run separately and save drafts. Incoming links and text are cleaned, and missing publication details stay empty rather than being guessed. URL checks skip existing articles without overwriting them, while normalized headline fingerprints catch exact same-headline copies. Basic GCC HealthTech keyword matches from FreeNewsAPI.ai are published; this filter is not an AI relevance verdict.",
-      },
-      {
-        title: "Optional Claude relevance check",
-        description:
-          "A separate, optional Claude API command checks an article’s headline and publisher description against written GCC HealthTech coverage rules. It returns a relevant/not-relevant verdict, a category and a short reason, so the decision can be reviewed. Responses must follow a defined format; missing verdicts and refusals are reported as errors. The check is read-only: it neither publishes articles nor changes the database, and it is not part of daily collection. Its accuracy has not yet been measured against the live API.",
-      },
-      {
-        title: "Testing and quality",
-        description:
-          "The Node.js test runner uses example feeds, simulated HTTP responses, a fake database and a simulated Claude client, so collector and relevance tests run without live services or paid API calls. Tests cover duplicate handling, publication boundaries, metadata, failures and cron authorization. Reader tests cover saved stories, date grouping, filters and trend thresholds. ESLint checks common code problems, and TypeScript checks article data types before release.",
-      },
-      {
-        title: "Development workflow",
-        description:
-          "Built in Cursor, using Claude Code and Codex to assist with planning, coding, debugging and reviews. Git and GitHub keep the source history traceable, and npm manages dependencies and repeatable development commands.",
-      },
-      {
-        title: "Hosting",
-        description:
-          "Vercel hosts the public reading interface and the scheduled collection endpoint. The cron route checks a backend-only secret before running, so an unauthorized request cannot start collection. AI summaries and an editorial dashboard remain planned.",
+          "Claude can check whether news headlines are relevant to the platform, suggest a category and explain its reasoning. The final publishing decision remains with a human.",
       },
     ],
     screenshot: {
@@ -178,7 +157,7 @@ export const projects: Project[] = [
     cardSolution:
       "A stock research platform with validated SEC filings, interactive dashboards, custom charts, quarterly changes and investor comparisons.",
     cardMotivation:
-      "Our investor group needed one tool to follow specific institutional investors and stocks across quarters. I built it to our exact needs, so we do our own analysis instead of digging through filings.",
+      "Our investor group needed one tool to follow them quarter by quarter. I built it to our exact needs, so we do our own analysis instead of digging through filings.",
     overview:
       "A research tool built for our investor group to follow institutional investors and the stocks they hold. It turns SEC filings into connected investor and stock views: what each tracked investor reports holding, how that changes from quarter to quarter, and how two portfolios compare. It lets us do our own analysis instead of digging through filings. The figures show reported holdings, not confirmed trades.",
     businessProblem:

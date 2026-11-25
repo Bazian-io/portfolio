@@ -10,6 +10,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   const relatedProject = projects.find(
     (candidate) => candidate.slug !== project.slug,
   );
+  const relatedProjectLead = relatedProject?.cardLead ?? relatedProject?.summary;
   const resources = [
     { label: "Live application", url: project.liveUrl, primary: true },
     { label: "GitHub repository", url: project.githubUrl, primary: false },
@@ -104,6 +105,18 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
               {project.overview ??
                 "Overview coming soon. This section will introduce the project, its purpose, and its intended users."}
             </p>
+            {!!project.overviewPoints?.length && (
+              <ol className="case-study-overview-list" role="list">
+                {project.overviewPoints.map((point, index) => (
+                  <li key={point}>
+                    <span className="case-study-overview-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ol>
+            )}
           </div>
         </section>
         <section
@@ -190,7 +203,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
                 <p className="project-card-category">{relatedProject.category}</p>
               )}
               <h3 id="related-project-title">{relatedProject.title}</h3>
-              {relatedProject.summary && <p>{relatedProject.summary}</p>}
+              {relatedProjectLead && <p>{relatedProjectLead}</p>}
               <span className="project-card-action">
                 View case study <span aria-hidden="true">→</span>
               </span>

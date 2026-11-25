@@ -38,9 +38,14 @@ export default function About() {
             <ul className="building-principles" data-reveal-stagger>
               <li>
                 <h3 className="building-label">What I build</h3>
-                <p>
-                  I build web applications, databases and AI integrations using Cursor, Claude Code and Codex.
-                </p>
+                <ul className="building-list" role="list">
+                  <li>Web applications</li>
+                  <li>Databases</li>
+                  <li>AI integrations</li>
+                  <li>Data automation</li>
+                  <li>Analytics and dashboards</li>
+                  <li>Business prototypes</li>
+                </ul>
               </li>
               <li>
                 <h3 className="building-label">How I work</h3>
@@ -51,7 +56,7 @@ export default function About() {
               <li>
                 <h3 className="building-label">Quality</h3>
                 <p>
-                  I make sure the result can be trusted: correct calculations, clean data, and pages that work on any screen.
+                  I make sure the result can be trusted: correct calculations and clean data.
                 </p>
               </li>
             </ul>
