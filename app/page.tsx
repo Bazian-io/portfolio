@@ -8,11 +8,11 @@ export default function Home() {
     <div className="home">
       <section className="hero container" aria-labelledby="hero-heading">
         <div className="hero-identity">
-          <h1 id="hero-heading">{profile.name}</h1>
-          <p className="hero-introduction">
+          <h1 id="hero-heading"><span data-opening="0">{profile.name}</span></h1>
+          <p className="hero-introduction" data-opening="1">
             I lead sales and business development, and I build my own tools <em>with AI</em>.
           </p>
-          <div className="hero-actions">
+          <div className="hero-actions" data-opening="2">
             <a className="hero-button" href="#projects">
               View Projects
               <svg
@@ -34,7 +34,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="hero-support">
+        <div className="hero-support" data-opening="3">
           <p className="hero-description">
             I’ve built sales from zero, rebuilt the incentives of a 70+ person sales organization, and founded and sold a communications agency.
           </p>
@@ -45,9 +45,9 @@ export default function Home() {
       </section>
       <div className="band--light">
         <ul className="hero-proof-points">
-          <li>Built sales from zero</li>
-          <li>Rebuilt incentives for a 70+ person sales organization</li>
-          <li>Founded and sold an agency</li>
+          <li data-opening="4">Built sales from zero</li>
+          <li data-opening="5">Rebuilt incentives for a 70+ person sales organization</li>
+          <li data-opening="6">Founded and sold an agency</li>
         </ul>
       </div>
       <SelectedProjects />

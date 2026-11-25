@@ -6,10 +6,10 @@ export default function ContactSection() {
       className="contact-section band--light"
       aria-labelledby="contact-heading"
     >
-      <h2 id="contact-heading">Get in touch</h2>
+      <h2 id="contact-heading" data-reveal>Get in touch</h2>
       <div className="contact-section-body">
-        <p>Want to talk about sales, go-to-market or how AI gets sold? Let’s connect.</p>
-        <ul className="contact-links" aria-label="Get in touch">
+        <p data-reveal>Want to talk about sales, go-to-market or how AI gets sold? Let’s connect.</p>
+        <ul className="contact-links" aria-label="Get in touch" data-reveal-stagger>
           <li>
             <a
               className="contact-link contact-link-primary"

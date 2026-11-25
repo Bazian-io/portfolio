@@ -30,12 +30,12 @@ export default function ToolsSection() {
   return (
     <section className="tools-section container" aria-labelledby="tools-heading">
       <header className="tools-header">
-        <h2 id="tools-heading">Tools I work with</h2>
+        <h2 id="tools-heading" data-reveal>Tools I work with</h2>
         <p>
           The tools behind my projects. Using them myself helps me understand the products I sell and the teams that build them.
         </p>
       </header>
-      <div className="tools-grid">
+      <div className="tools-grid" data-reveal-stagger>
         {toolGroups.map((group) => (
           <section
             className="tools-group"

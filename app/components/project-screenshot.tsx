@@ -15,12 +15,14 @@ export default function ProjectScreenshot({
   if (screenshot) {
     return (
       <div className={`project-preview project-preview-image ${className}`}>
-        <Image
-          src={screenshot.src}
-          alt={screenshot.alt}
-          fill
-          sizes={sizes}
-        />
+        <span className="project-preview-pan">
+          <Image
+            src={screenshot.src}
+            alt={screenshot.alt}
+            fill
+            sizes={sizes}
+          />
+        </span>
       </div>
     );
   }

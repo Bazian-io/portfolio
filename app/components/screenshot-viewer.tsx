@@ -20,7 +20,8 @@ export default function ScreenshotViewer({
   return (
     <figure className="screenshot-viewer">
       <button
-        className="screenshot-trigger"
+        className="screenshot-trigger reveal-settle"
+        data-reveal
         type="button"
         aria-label={`Enlarge screenshot of ${title}`}
         aria-haspopup="dialog"

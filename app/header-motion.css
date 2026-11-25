@@ -1,0 +1,60 @@
+:root {
+  --site-header-height: calc(var(--header-min-height) + 1px);
+  --visible-header-height: var(--site-header-height);
+  --header-slide: 300ms var(--motion-ease);
+}
+
+/* Reserve room for both header rows before the measured height is available. */
+@media (max-width: 40rem) {
+  :root {
+    --site-header-height: calc(2 * var(--control-min-height) + var(--space-1) + 2 * var(--space-2) + 1px);
+  }
+}
+
+.site-header {
+  position: sticky;
+  z-index: 3;
+  top: 0;
+}
+
+.case-study-navigation {
+  top: var(--visible-header-height);
+}
+
+.case-study-section {
+  /* Five rem clears even the two-line menu before its exact height is measured. */
+  scroll-margin-top: calc(var(--visible-header-height) + var(--case-study-scroll-offset, 5rem));
+}
+
+#main-content,
+#projects {
+  scroll-margin-top: var(--visible-header-height);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Native fragment navigation can precede hydration on a direct case-study visit. */
+  @media (scripting: enabled) {
+    :root:not([data-header-ready]):has(.case-study-section:target) {
+      --visible-header-height: 0px;
+    }
+
+    /* Anchor jumps hide the site header. Reserve only the section menu, even
+       if the browser calculates the destination before hydration. */
+    .case-study-section {
+      scroll-margin-top: var(--case-study-scroll-offset, 5rem);
+    }
+  }
+
+  :root[data-header-hidden]:not(:has(.site-header :focus-visible)) {
+    --visible-header-height: 0px;
+  }
+
+  .site-header {
+    translate: 0 calc(var(--visible-header-height) - var(--site-header-height));
+    transition: translate var(--header-slide);
+  }
+
+  .case-study-navigation {
+    transition: top var(--header-slide);
+  }
+}

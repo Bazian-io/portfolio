@@ -2,10 +2,22 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import type { CSSProperties, ReactNode } from "react";
 import DebugCodexVisibility from "./components/debug-codex-visibility";
+import ScrollReveals from "./components/scroll-reveals";
 import SiteHeader from "./components/site-header";
 import { profile } from "./data/profile";
 import theme from "./data/theme.json";
 import "./globals.css";
+import "./motion.css";
+import "./header-motion.css";
+
+const enableReveals = `(() => {
+  if (!("IntersectionObserver" in window)) return;
+  const root = document.documentElement;
+  root.classList.add("reveal-js");
+  setTimeout(() => {
+    if (!root.hasAttribute("data-reveal-ready")) root.classList.remove("reveal-js");
+  }, 3000);
+})();`;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,7 +62,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       className={`${inter.variable} ${sourceSerif.variable}`}
       style={theme as CSSProperties}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: enableReveals }} />
+      </head>
       <body id="top">
         <a className="skip-link" href="#main-content">
           Skip to content
@@ -60,6 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="main-content" id="main-content" tabIndex={-1}>
           {children}
         </main>
+        <ScrollReveals />
         <footer className="site-footer">
           <div className="container footer-inner">
             <div className="footer-identity">

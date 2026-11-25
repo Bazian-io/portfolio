@@ -9,7 +9,8 @@ export default function SelectedProjects({
   headingLevel?: "h1" | "h2";
 }) {
   const Heading = headingLevel;
-  const CardHeading = headingLevel === "h1" ? "h2" : "h3";
+  const isProjectsPage = headingLevel === "h1";
+  const CardHeading = isProjectsPage ? "h2" : "h3";
   // #region agent log
   fetch("http://127.0.0.1:7502/ingest/4aebd9e1-8e57-4953-bc90-28d248b381c2", {
     method: "POST",
@@ -50,16 +51,26 @@ export default function SelectedProjects({
       aria-labelledby="selected-projects-heading"
       tabIndex={-1}
     >
-      <Heading className="section-heading" id="selected-projects-heading">
+      <Heading
+        className="section-heading"
+        id="selected-projects-heading"
+        data-opening={isProjectsPage ? "0" : undefined}
+        data-reveal={isProjectsPage ? undefined : true}
+      >
         Selected Projects
       </Heading>
-      <p className="selected-projects-intro">
+      <p
+        className="selected-projects-intro"
+        data-opening={isProjectsPage ? "1" : undefined}
+        data-reveal={isProjectsPage ? undefined : true}
+      >
         Both projects started from a real need of a specific group of users. That is also how I approach sales.
       </p>
       <div className="project-grid">
         {projects.map((project) => (
           <article
-            className="project-card"
+            className="project-card reveal-settle"
+            data-reveal
             key={project.slug}
             aria-labelledby={`${project.slug}-heading`}
           >

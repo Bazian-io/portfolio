@@ -45,17 +45,17 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
   return (
     <article className="case-study" aria-labelledby="case-study-title">
       <div className="container">
-        <Link className="case-study-back" href="/projects">
+        <Link className="case-study-back" href="/projects" data-opening={0}>
           <span aria-hidden="true">←</span> All projects
         </Link>
         <header className="case-study-header">
-          <p className="hero-eyebrow">Project case study</p>
-          <h1 className="case-study-title" id="case-study-title">
+          <p className="hero-eyebrow" data-opening={1}>Project case study</p>
+          <h1 className="case-study-title" id="case-study-title" data-opening={2}>
             {project.title}
           </h1>
           <ul className="project-resources" aria-label="Explore the project">
-            {resources.map(({ label, url, primary }) => (
-              <li key={label}>
+            {resources.map(({ label, url, primary }, index) => (
+              <li key={label} data-opening={3 + index}>
                 {url ? (
                   <a
                     className={`project-resource${primary ? " project-resource-primary" : ""}`}
@@ -76,7 +76,10 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
         </header>
       </div>
       <CaseStudyNavigation />
-      <div className="case-study-media container">
+      <div
+        className="case-study-media container"
+        data-reveal={project.screenshot ? undefined : true}
+      >
         {project.screenshot ? (
           <ScreenshotViewer title={project.title} screenshot={project.screenshot} />
         ) : (
@@ -93,6 +96,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           id="overview"
           tabIndex={-1}
           aria-labelledby="overview-heading"
+          data-reveal-stagger
         >
           <h2 id="overview-heading">Project overview</h2>
           <div className="case-study-body">
@@ -107,6 +111,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           id="business-problem"
           tabIndex={-1}
           aria-labelledby="problem-heading"
+          data-reveal-stagger
         >
           <h2 id="problem-heading">Business problem</h2>
           <div className="case-study-body">
@@ -123,7 +128,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
         tabIndex={-1}
         aria-labelledby="implementation-heading"
       >
-        <h2 id="implementation-heading">Technical implementation</h2>
+        <h2 id="implementation-heading" data-reveal>Technical implementation</h2>
         <div className="case-study-body">
           {!!project.technicalFlow?.length && (
             <TechnicalFlow
@@ -134,14 +139,14 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           {project.implementation?.length ? (
             <ul className="implementation-list">
               {project.implementation.map(({ title, description }) => (
-                <li key={title}>
+                <li key={title} data-reveal>
                   <h3>{title}</h3>
                   <p>{description}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p>
+            <p data-reveal>
               Implementation details coming soon. This section will describe the
               technologies, AI tools, automation, APIs, and infrastructure used,
               where applicable.
@@ -150,6 +155,7 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           <section
             className="technology-stack tools-group"
             aria-labelledby="technology-stack-heading"
+            data-reveal
           >
             <div className="tools-group-header">
               <h3 id="technology-stack-heading">Built with</h3>
@@ -166,11 +172,12 @@ export default function ProjectCaseStudy({ project }: { project: Project }) {
           className="related-project container"
           aria-labelledby="related-project-heading"
         >
-          <h2 id="related-project-heading">Explore another project</h2>
+          <h2 id="related-project-heading" data-reveal>Explore another project</h2>
           <Link
-            className="related-project-link"
+            className="related-project-link reveal-settle"
             href={`/projects/${relatedProject.slug}`}
             aria-labelledby="related-project-title"
+            data-reveal
           >
             <ProjectScreenshot
               title={relatedProject.title}

@@ -1,0 +1,129 @@
+.technical-flow .technical-flow-steps {
+  --flow-gap: 1.75rem;
+  --flow-marker: 1.75rem;
+  --flow-center: calc(var(--space-4) + var(--flow-marker) / 2);
+  gap: var(--flow-gap);
+}
+
+.technical-flow .technical-flow-steps > li {
+  display: grid;
+  grid-template-columns: var(--flow-marker) minmax(0, 1fr);
+  column-gap: var(--space-3);
+  align-content: start;
+}
+
+.technical-flow .technical-flow-number {
+  position: relative;
+  z-index: 1;
+  grid-row: 1 / 3;
+  width: var(--flow-marker);
+  height: var(--flow-marker);
+  margin: 0;
+  background: var(--bg);
+}
+
+.technical-flow-steps > li > :is(h3, p) {
+  grid-column: 2;
+}
+
+.technical-flow .technical-flow-steps p {
+  color: var(--soft);
+}
+
+/* Each segment joins consecutive marker centers, even when step heights differ. */
+.technical-flow-steps > li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: var(--flow-center);
+  left: calc(var(--flow-marker) / 2 - 1px);
+  width: 2px;
+  height: calc(100% + var(--flow-gap) + var(--hairline-width));
+  background: var(--tint);
+  transform-origin: top;
+  --flow-empty-scale: 1 0;
+}
+
+.technical-flow .technical-flow-arrow {
+  left: calc(var(--flow-marker) / 2 - 9px);
+  top: calc(var(--flow-center) + (100% + var(--flow-gap) + var(--hairline-width)) / 2 - 9px);
+  bottom: auto;
+}
+
+@media (min-width: 64rem) {
+  .technical-flow .technical-flow-steps {
+    grid-template-columns: repeat(var(--flow-count), minmax(0, 1fr));
+  }
+
+  .technical-flow .technical-flow-steps > li {
+    display: block;
+  }
+
+  .technical-flow .technical-flow-number {
+    display: flex;
+    margin-bottom: var(--space-3);
+  }
+
+  .technical-flow-steps > li:not(:last-child)::before {
+    top: calc(var(--flow-center) - 1px);
+    left: calc(var(--flow-marker) / 2);
+    width: calc(100% + var(--flow-gap));
+    height: 2px;
+    transform-origin: left;
+    --flow-empty-scale: 0 1;
+  }
+
+  .technical-flow .technical-flow-arrow {
+    left: calc(var(--flow-marker) / 2 + (100% + var(--flow-gap)) / 2 - 9px);
+    top: calc(var(--flow-center) - 9px);
+    right: auto;
+  }
+}
+
+@keyframes draw-flow-segment {
+  from { scale: var(--flow-empty-scale); }
+  to { scale: 1; }
+}
+
+@keyframes light-flow-step {
+  from { color: var(--muted); }
+  to { color: var(--flow-lit); }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .technical-flow {
+      view-timeline: --flow block;
+    }
+
+    .technical-flow-steps > li {
+      --flow-interval: calc(40vh / max(1, var(--flow-count) - 1));
+      --flow-stop: calc(20vh + var(--flow-index) * var(--flow-interval));
+      --flow-lit: var(--text);
+    }
+
+    .technical-flow-steps > li:not(:last-child)::before {
+      animation: draw-flow-segment linear both;
+      animation-timeline: --flow;
+      animation-range: cover var(--flow-stop) cover calc(var(--flow-stop) + var(--flow-interval));
+    }
+
+    .technical-flow-steps .technical-flow-number,
+    .technical-flow-steps .technical-flow-arrow {
+      --flow-lit: var(--tint);
+    }
+
+    .technical-flow-steps > li > p {
+      --flow-lit: var(--soft);
+    }
+
+    .technical-flow-steps > li > .technical-flow-arrow {
+      --light-at: calc(var(--flow-stop) + var(--flow-interval) / 2);
+    }
+
+    .technical-flow-steps > li > :is(.technical-flow-number, h3, p, .technical-flow-arrow) {
+      animation: light-flow-step var(--motion-ease) both;
+      animation-timeline: --flow;
+      animation-range: cover calc(var(--light-at, var(--flow-stop)) - 1vh) cover var(--light-at, var(--flow-stop));
+    }
+  }
+}

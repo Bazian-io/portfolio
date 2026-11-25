@@ -1,0 +1,100 @@
+.commercial-counter {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .about-content > .about-commercial {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .commercial-heading {
+    position: sticky;
+    top: 120px;
+    align-self: start;
+  }
+
+  .commercial-counter {
+    display: block;
+    visibility: hidden;
+    margin-top: var(--space-4);
+    color: var(--tint);
+    font-size: var(--font-size-label);
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .about-commercial[data-tracking] .commercial-counter {
+    visibility: visible;
+  }
+
+  .about-commercial .career-highlights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .about-content .about-commercial .career-highlights > li {
+      opacity: 1;
+      translate: none;
+      transition: border-color 400ms var(--motion-ease);
+    }
+
+    .about-commercial .career-highlights :is(h3, p) {
+      transition: color 400ms var(--motion-ease);
+    }
+
+    .about-commercial[data-tracking] li:not([data-active]) {
+      --text: var(--muted);
+      --soft: var(--muted);
+    }
+
+    .about-commercial li[data-active] {
+      border-color: var(--tint);
+    }
+
+    .about-commercial li[data-active] .career-figure {
+      color: var(--tint);
+    }
+  }
+}
+
+/* Keep one continuous quotation in the accessibility tree. */
+.quote-transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  user-select: none;
+}
+
+@keyframes light-quote-word {
+  from {
+    color: #B4BABB;
+    -webkit-text-stroke-width: 1.5px;
+  }
+  70% { -webkit-text-stroke-width: 1.5px; }
+  to {
+    color: var(--text);
+    -webkit-text-stroke-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (prefers-contrast: no-preference) and (forced-colors: none) {
+  @supports (animation-timeline: view()) and (animation-range: cover 25vh cover 55vh) and (-webkit-text-stroke: 1px currentColor) {
+    .background-quote {
+      view-timeline-name: --quote;
+    }
+
+    .quote-words > span {
+      /* The dark edge keeps the initial pale fill legible on the light band. */
+      -webkit-text-stroke-color: var(--muted);
+      paint-order: stroke fill;
+      animation: light-quote-word var(--motion-ease) both;
+      animation-timeline: --quote;
+      --word-travel: calc(30vh / var(--word-count));
+      --word-start: calc(25vh + var(--word-index) * var(--word-travel));
+      animation-range: cover var(--word-start) cover calc(var(--word-start) + var(--word-travel));
+    }
+  }
+}

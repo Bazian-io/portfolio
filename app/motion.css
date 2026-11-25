@@ -1,0 +1,140 @@
+:root {
+  --motion-ease: cubic-bezier(.22, 1, .36, 1);
+  --motion-duration: 800ms;
+  --motion-rise: 24px;
+  --motion-stagger: 90ms;
+  --band-inset: min(4%, var(--page-gutter) - 8px);
+  --band-radius: 28px;
+}
+
+@media (width < 640px) {
+  :root {
+    --motion-rise: 16px;
+    --band-radius: 20px;
+  }
+}
+
+/* The header observes the h1. Only its text moves. */
+#hero-heading > [data-opening] {
+  display: block;
+}
+
+.project-preview-pan {
+  position: absolute;
+  inset: 0;
+}
+
+.case-study-navigation::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -1px;
+  height: 2px;
+  background: var(--tint);
+  transform-origin: left;
+  transform: scaleX(var(--reading-progress, 0));
+  pointer-events: none;
+}
+
+@keyframes opening-rise {
+  from { opacity: 0; translate: 0 var(--motion-rise); }
+  to { opacity: 1; translate: none; }
+}
+
+@keyframes widen-band {
+  from { clip-path: inset(0 var(--band-inset) round var(--band-radius)); }
+  to { clip-path: inset(0 0 round 0); }
+}
+
+@keyframes pan-preview {
+  from { translate: 0 -20px; }
+  to { translate: 0 20px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-opening="1"],
+  .selected-projects-intro[data-reveal],
+  .contact-section-body > p,
+  .related-project-link { --motion-index: 1; }
+  [data-opening="2"],
+  .home .project-card { --motion-index: 2; }
+  [data-opening="3"],
+  .building-case-link { --motion-index: 3; }
+  [data-opening="4"] { --motion-index: 4; }
+  [data-opening="5"] { --motion-index: 5; }
+  [data-opening="6"] { --motion-index: 6; }
+
+  @media (scripting: enabled) {
+    [data-opening] {
+      animation: opening-rise var(--motion-duration) var(--motion-ease) backwards;
+      animation-delay: calc(100ms + var(--motion-index, 0) * var(--motion-stagger));
+    }
+
+    [data-opening]:focus-within {
+      /* Override the current frame without restarting the sequence on blur. */
+      opacity: 1 !important;
+      translate: none !important;
+    }
+  }
+
+  .contact-links { --stagger-offset: 2; }
+  .background-quote + p { --reveal-delay: 250ms; }
+
+  @media (min-width: 48rem) {
+    #technical-implementation .case-study-body { --stagger-offset: 1; }
+  }
+
+  .reveal-js :where([data-reveal], [data-reveal-stagger] > *) {
+    --delay: var(--reveal-delay, calc((var(--motion-index, 0) + var(--stagger-offset, 0)) * var(--motion-stagger)));
+    --timing: var(--reveal-duration, var(--motion-duration)) var(--motion-ease) var(--delay);
+    --reveal-transitions: opacity var(--timing), translate var(--timing);
+    transition: var(--reveal-transitions);
+  }
+
+  .reveal-js :is(.project-card, .related-project-link) {
+    transition: var(--card-hover-transitions), var(--reveal-transitions);
+  }
+
+  .reveal-js :where([data-reveal], [data-reveal-stagger] > *):not([data-revealed]):not(:focus-within) {
+    opacity: 0;
+    translate: 0 var(--motion-rise);
+  }
+
+  .reveal-js .reveal-settle .project-preview-image img {
+    transition: scale 1200ms var(--motion-ease) var(--delay);
+  }
+
+  .reveal-js .reveal-settle:not([data-revealed]):not(:focus-within) .project-preview-image img {
+    scale: 1.04;
+  }
+
+  .reveal-js :where([data-reveal], [data-reveal-stagger] > *):focus-within {
+    transition: var(--card-hover-transitions, none);
+  }
+
+  .reveal-js .reveal-settle:focus-within .project-preview-image img {
+    transition: none;
+  }
+
+  @supports (animation-timeline: view()) {
+    :is(.project-card, .related-project-link) .project-preview-image {
+      view-timeline-name: --preview-frame;
+    }
+
+    :is(.project-card, .related-project-link) .project-preview-pan {
+      inset-block: -24px;
+      animation: pan-preview linear both;
+      animation-timeline: --preview-frame;
+      animation-range: cover;
+    }
+
+    .related-project-preview .project-preview-pan img {
+      object-fit: cover;
+    }
+
+    .band--light {
+      animation: widen-band linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 70vh;
+    }
+  }
+}

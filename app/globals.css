@@ -438,7 +438,8 @@ button {
 
 .project-card,
 .related-project-link {
-  overflow: hidden;
+  /* Clip the corners without trapping the preview's viewport scroll timeline. */
+  overflow: clip;
   border: 1px solid var(--border-raised);
   border-radius: var(--radius-card);
   background: var(--surface-raised);
@@ -1815,7 +1816,8 @@ a.project-resource-primary:hover {
 
   .project-card,
   .related-project-link {
-    transition: transform 200ms ease-out, border-color 200ms ease-out;
+    --card-hover-transitions: transform 200ms ease-out, border-color 200ms ease-out;
+    transition: var(--card-hover-transitions);
   }
 
   .project-card-action span {

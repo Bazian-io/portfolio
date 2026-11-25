@@ -1,4 +1,6 @@
+import type { CSSProperties } from "react";
 import type { Project } from "../data/projects";
+import "./technical-flow.css";
 
 export default function TechnicalFlow({
   steps,
@@ -9,10 +11,13 @@ export default function TechnicalFlow({
 }) {
   return (
     <figure className="technical-flow" aria-labelledby="technical-flow-heading">
-      <figcaption id="technical-flow-heading">How the application works</figcaption>
-      <ol className="technical-flow-steps">
+      <figcaption id="technical-flow-heading" data-reveal>How the application works</figcaption>
+      <ol
+        className="technical-flow-steps"
+        style={{ "--flow-count": steps.length } as CSSProperties}
+      >
         {steps.map(({ label, technologies }, index) => (
-          <li key={label}>
+          <li key={label} style={{ "--flow-index": index } as CSSProperties}>
             <span className="technical-flow-number" aria-hidden="true">
               {String(index + 1).padStart(2, "0")}
             </span>
@@ -37,7 +42,15 @@ export default function TechnicalFlow({
           </li>
         ))}
       </ol>
-      {note && <p className="technical-flow-note">{note}</p>}
+      {note && (
+        <p
+          className="technical-flow-note"
+          data-reveal
+          style={{ "--motion-index": steps.length + 1 } as CSSProperties}
+        >
+          {note}
+        </p>
+      )}
     </figure>
   );
 }
